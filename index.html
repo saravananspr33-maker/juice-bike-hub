@@ -534,7 +534,7 @@
         <div class="card-header">
           <span class="section-kicker">Management Security</span>
           <h2>Owner Dashboard</h2>
-          <p class="sub">Unlock to monitor recent customer interactions and feedback (Passcode:).</p>
+          <p class="sub">Unlock to monitor recent customer interactions and feedback.</p>
         </div>
 
         <div class="owner-lock" style="margin-bottom: 24px;">
@@ -758,7 +758,7 @@
           showToast("Dashboard Unlocked", "Private reviews feed is active.");
           ownerCode.value = "";
         } else {
-          showToast("Access Denied", "Incorrect passcode (use Sar.26@1999).", "!");
+          showToast("Access Denied", "Incorrect passcode", "!");
           ownerCode.select();
         }
       });
