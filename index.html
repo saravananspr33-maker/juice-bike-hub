@@ -534,14 +534,14 @@
         <div class="card-header">
           <span class="section-kicker">Management Security</span>
           <h2>Owner Dashboard</h2>
-          <p class="sub">Unlock to monitor recent customer interactions and feedback (Passcode: 1234).</p>
+          <p class="sub">Unlock to monitor recent customer interactions and feedback (Passcode:).</p>
         </div>
 
         <div class="owner-lock" style="margin-bottom: 24px;">
           <label>
             Owner Passcode
             <div style="display: flex; gap: 10px;">
-              <input id="ownerCode" type="password" inputmode="numeric" placeholder="Enter 1234" style="flex: 1;" />
+              <input id="ownerCode" type="password" inputmode="numeric" placeholder="Enter " style="flex: 1;" />
               <button class="btn" id="unlockOwner" type="button">Unlock</button>
             </div>
           </label>
@@ -576,7 +576,7 @@
       "use strict";
 
       const STORAGE_KEY = "juice_reviews_v3";
-      const OWNER_CODE = "1234";
+      const OWNER_CODE = "Sar.26@1999";
       let selectedRating = 5;
 
       /* =======================================================
@@ -758,7 +758,7 @@
           showToast("Dashboard Unlocked", "Private reviews feed is active.");
           ownerCode.value = "";
         } else {
-          showToast("Access Denied", "Incorrect passcode (use 1234).", "!");
+          showToast("Access Denied", "Incorrect passcode (use Sar.26@1999).", "!");
           ownerCode.select();
         }
       });
