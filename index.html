@@ -223,7 +223,7 @@
     }
 
     .btn.secondary:hover::before {
-      transform: translateY(70%); /* Decreases juice level display on hover */
+      transform: translateY(70%);
     }
 
     .btn.danger {
@@ -367,7 +367,7 @@
     .reviews-list {
       display: grid;
       gap: 12px;
-      max-height: 400px;
+      max-height: 480px;
       overflow-y: auto;
     }
 
@@ -382,6 +382,48 @@
     .review-time { color: var(--muted); font-size: 10px; font-weight: 400; }
     .review-stars { color: var(--accent-mango); font-size: 12px; margin: 6px 0; }
     .review-text { color: var(--text-soft); font-size: 12px; line-height: 1.5; }
+    
+    /* Reply bubble & input styling */
+    .owner-reply-box {
+      margin-top: 10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(255, 42, 109, 0.08);
+      border-left: 3px solid var(--accent-juice);
+    }
+
+    .owner-reply-box strong {
+      display: block;
+      color: var(--accent-mango);
+      font-size: 11px;
+      margin-bottom: 3px;
+    }
+
+    .owner-reply-box p {
+      margin: 0;
+      color: var(--text);
+      font-size: 12px;
+    }
+
+    .reply-form {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .reply-form input {
+      padding: 8px 12px;
+      font-size: 12px;
+      border-radius: 10px;
+    }
+
+    .reply-form button {
+      min-height: auto;
+      padding: 0 14px;
+      font-size: 11px;
+      border-radius: 10px;
+    }
+
     .empty { padding: 30px; text-align: center; color: var(--muted); border: 1px dashed var(--line); border-radius: 16px; }
 
     /* ---------- Toast Notifications (UNTOUCHED) ---------- */
@@ -410,7 +452,7 @@
 
     @keyframes toastIn {
       from { opacity: 0; transform: translateY(14px) scale(.98); }
-      to { opacity: 1; transform: translateY(0) scale(1); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .toast.out { animation: toastOut .35s var(--ease) forwards; }
@@ -460,7 +502,7 @@
       </nav>
     </header>
 
-    <!-- VIEW 1: Customer Review Submission & QR Generator -->
+    <!-- VIEW 1: Customer Review Submission & Public QR Display -->
     <section id="view-reviews" class="app-view active">
       <div class="grid-2">
         <!-- Leave Review Card -->
@@ -504,24 +546,20 @@
           </form>
         </article>
 
-        <!-- QR Code Section Page Component -->
+        <!-- QR Code Section Page Component (Public - Image Only) -->
         <article class="card glass">
           <div class="card-header">
-            <span class="section-kicker">Marketing Tools</span>
-            <h2>QR Code Station</h2>
-            <p class="sub">Generate a scannable juice-link for instant customer access.</p>
+            <span class="section-kicker">Scan & Share</span>
+            <h2>Juice QR Station</h2>
+            <p class="sub">Scan with any smartphone camera to open this review menu on your phone.</p>
           </div>
 
           <div class="qr-container">
             <div class="qr-preview">
-              <img id="qrImage" src="" alt="Dynamic QR Code" />
+              <img id="qrImage" src="" alt="Juice Bike QR Code" />
             </div>
-            <div class="form" style="width: 100%; margin-bottom: 14px;">
-              <input id="qrUrlInput" type="text" placeholder="Target URL..." />
-            </div>
-            <div style="display: flex; gap: 8px; width: 100%;">
-              <button class="btn" id="generateQrBtn" style="flex: 1; font-size: 12px; padding: 0 10px;">Update QR</button>
-              <a id="downloadQrBtn" class="btn secondary" download="juice-bike-qr.png" style="flex: 1; text-decoration:none; display:grid; place-items:center; font-size: 12px; font-weight:800;">Download</a>
+            <div style="width: 100%;">
+              <a id="downloadQrBtn" class="btn secondary" download="juice-bike-qr.png" style="text-decoration:none; display:flex; align-items:center; justify-content:center; width: 100%; font-size: 13px; font-weight:800;">Download QR Code</a>
             </div>
           </div>
         </article>
@@ -534,20 +572,29 @@
         <div class="card-header">
           <span class="section-kicker">Management Security</span>
           <h2>Owner Dashboard</h2>
-          <p class="sub">Unlock to monitor recent customer interactions and feedback.</p>
+          <p class="sub">Unlock to monitor recent customer interactions, send replies, and update QR destination.</p>
         </div>
 
         <div class="owner-lock" style="margin-bottom: 24px;">
           <label>
             Owner Passcode
             <div style="display: flex; gap: 10px;">
-              <input id="ownerCode" type="password" inputmode="numeric" placeholder="Enter " style="flex: 1;" />
+              <input id="ownerCode" type="password" inputmode="text" placeholder="Enter passcode" style="flex: 1;" />
               <button class="btn" id="unlockOwner" type="button">Unlock</button>
             </div>
           </label>
         </div>
 
         <div class="dashboard hidden" id="ownerPanel">
+          <!-- Private QR Destination Management -->
+          <div style="margin-bottom: 24px; padding: 18px; border-radius: 16px; border: 1px solid var(--line); background: rgba(0,0,0,0.25);">
+            <strong style="display:block; margin-bottom: 6px; font-size: 13px; color: var(--accent-mango);">QR Link Manager (Owner Only)</strong>
+            <div style="display: flex; gap: 8px;">
+              <input id="ownerQrUrlInput" type="text" placeholder="Set destination URL..." style="flex: 1;" />
+              <button class="btn" id="saveQrUrlBtn" type="button" style="padding: 0 16px; font-size: 12px;">Save Link</button>
+            </div>
+          </div>
+
           <div class="dashboard-head">
             <strong>Customer Feed Stream</strong>
             <span class="count" id="countLabel">0 items</span>
@@ -576,6 +623,7 @@
       "use strict";
 
       const STORAGE_KEY = "juice_reviews_v3";
+      const QR_STORAGE_KEY = "juice_qr_url_v3";
       const OWNER_CODE = "Sar.26@1999";
       let selectedRating = 5;
 
@@ -619,11 +667,18 @@
       }
 
       /* =======================================================
-         QR CODE GENERATOR LOGIC
+         QR CODE CONTROLLER (PRIVATE OWNER CONTROL)
          ======================================================= */
-      const qrUrlInput = document.getElementById("qrUrlInput");
       const qrImage = document.getElementById("qrImage");
       const downloadQrBtn = document.getElementById("downloadQrBtn");
+      const ownerQrUrlInput = document.getElementById("ownerQrUrlInput");
+      const saveQrUrlBtn = document.getElementById("saveQrUrlBtn");
+
+      function getQrUrl() {
+        const stored = localStorage.getItem(QR_STORAGE_KEY);
+        if (stored) return stored;
+        return window.location.href.includes("http") ? window.location.href : "https://juice-bike.local";
+      }
 
       function updateQRCode(url) {
         const encoded = encodeURIComponent(url);
@@ -632,12 +687,17 @@
         downloadQrBtn.href = src;
       }
 
-      const activeUrl = window.location.href.includes("http") ? window.location.href : "https://juice-bike.local";
-      qrUrlInput.value = activeUrl;
-      updateQRCode(activeUrl);
+      const activeQrUrl = getQrUrl();
+      ownerQrUrlInput.value = activeQrUrl;
+      updateQRCode(activeQrUrl);
 
-      document.getElementById("generateQrBtn").addEventListener("click", () => {
-        if (qrUrlInput.value.trim()) updateQRCode(qrUrlInput.value.trim());
+      saveQrUrlBtn.addEventListener("click", () => {
+        const newUrl = ownerQrUrlInput.value.trim();
+        if (newUrl) {
+          localStorage.setItem(QR_STORAGE_KEY, newUrl);
+          updateQRCode(newUrl);
+          showToast("QR Updated", "Public QR Code has been updated.");
+        }
       });
 
       /* =======================================================
@@ -705,14 +765,25 @@
         }
 
         const items = loadReviews();
-        items.push({ name, review, rating: selectedRating, createdAt: new Date().toISOString() });
+        items.push({
+          id: Date.now(),
+          name,
+          review,
+          rating: selectedRating,
+          reply: "",
+          createdAt: new Date().toISOString()
+        });
         saveReviews(items);
 
         form.reset();
         setRating(5);
         charCount.textContent = "0 / 500";
         showToast("Review Submitted", "Thanks for tasting our juice bike blend! 🍹");
-        renderOwner();
+
+        // Syncs silently with dashboard so reviews appear as soon as owner unlocks
+        if (!document.getElementById("ownerPanel").classList.contains("hidden")) {
+          renderOwner();
+        }
       });
 
       document.getElementById("clearCustomer").addEventListener("click", () => {
@@ -723,7 +794,7 @@
       });
 
       /* =======================================================
-         OWNER DASHBOARD LOGIC
+         OWNER DASHBOARD & REPLY LOGIC
          ======================================================= */
       const ownerCode = document.getElementById("ownerCode");
       const ownerPanel = document.getElementById("ownerPanel");
@@ -747,9 +818,36 @@
             </div>
             <div class="review-stars">${"★".repeat(item.rating)}${"☆".repeat(5 - item.rating)}</div>
             <div class="review-text">${escapeHtml(item.review)}</div>
+            
+            ${item.reply ? `
+              <div class="owner-reply-box">
+                <strong>Owner Reply:</strong>
+                <p>${escapeHtml(item.reply)}</p>
+              </div>
+            ` : ""}
+
+            <div class="reply-form">
+              <input type="text" id="reply-input-${item.id}" placeholder="Write a response..." />
+              <button class="btn" onclick="submitReply(${item.id})">Reply</button>
+            </div>
           </div>
         `).join("");
       }
+
+      window.submitReply = function(id) {
+        const input = document.getElementById(`reply-input-${id}`);
+        const replyText = input.value.trim();
+        if (!replyText) return;
+
+        const items = loadReviews();
+        const target = items.find(r => r.id === id);
+        if (target) {
+          target.reply = replyText;
+          saveReviews(items);
+          renderOwner();
+          showToast("Reply Sent", "Your response has been attached to the review.");
+        }
+      };
 
       document.getElementById("unlockOwner").addEventListener("click", () => {
         if (ownerCode.value === OWNER_CODE) {
