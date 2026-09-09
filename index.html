@@ -1,779 +1,1330 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#120408" />
-  <meta name="color-scheme" content="dark" />
-  <title>Juice Bike — Ultimate Liquid Experience</title>
+  <meta name="theme-color" content="#fff8f0" />
+  <title>Juice Bike — Artisan Liquid Bar</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet" />
 
   <style>
     /* =========================================================
-       JUICE BIKE — FUTURISTIC LIQUID REBUILD
+       FRUIT PALETTE SYSTEM (LIGHT & MILD DARK DUAL-ENGINE)
        ========================================================= */
-
     :root {
-      --bg: #120408;
-      --surface: rgba(30, 8, 16, 0.75);
-      --surface-strong: rgba(45, 12, 24, 0.9);
-      --surface-soft: rgba(255, 105, 180, 0.05);
-      --text: #fff1f5;
-      --text-soft: #fbcfe8;
-      --muted: #fda4af;
-      --line: rgba(255, 105, 180, 0.2);
-      --accent-juice: #ff2a6d;
-      --accent-mango: #ff9f1c;
-      --accent-lime: #2ec4b6;
-      --shadow: 0 30px 90px rgba(255, 42, 109, 0.25);
-      --radius-xl: 32px;
-      --radius-lg: 24px;
-      --ease: cubic-bezier(.22,1,.36,1);
+      /* Fruit Tone Colors */
+      --mango-core: #ff9e00;
+      --mango-glow: #ffb703;
+      --apple-crisp: #e63946;
+      --apple-soft: #ff6b6b;
+      --lime-fresh: #06d6a0;
+      --mint-bg: #f0fdf4;
+
+      /* Mild Light Theme (Fresh Smoothie Vibe) */
+      --bg-base: #fdfbf7;
+      --bg-mesh-1: rgba(255, 158, 0, 0.12);
+      --bg-mesh-2: rgba(230, 57, 70, 0.09);
+      --bg-mesh-3: rgba(6, 214, 160, 0.08);
+
+      --surface: rgba(255, 255, 255, 0.72);
+      --surface-solid: #ffffff;
+      --surface-elevated: rgba(255, 255, 255, 0.88);
+      --border-subtle: rgba(255, 158, 0, 0.18);
+      --border-strong: rgba(230, 57, 70, 0.22);
+
+      --text-main: #2b1e1a;
+      --text-soft: #63504b;
+      --text-muted: #9c857e;
+
+      --card-shadow: 0 20px 50px -10px rgba(224, 102, 51, 0.12), 0 0 1px rgba(0,0,0,0.06);
+      --glow-shadow: 0 12px 35px rgba(255, 158, 0, 0.32);
+
+      --radius-full: 9999px;
+      --radius-2xl: 28px;
+      --radius-xl: 20px;
+      --radius-md: 14px;
+      --ease-fluid: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
     }
 
-    * { box-sizing: border-box; }
+    [data-theme="dark"] {
+      /* Mild Dark Theme (Ripe Night Velvet, Not Pitch Black) */
+      --bg-base: #1f1917;
+      --bg-mesh-1: rgba(255, 158, 0, 0.14);
+      --bg-mesh-2: rgba(230, 57, 70, 0.14);
+      --bg-mesh-3: rgba(6, 214, 160, 0.07);
 
-    html { scroll-behavior: smooth; }
+      --surface: rgba(38, 30, 27, 0.75);
+      --surface-solid: #2c221e;
+      --surface-elevated: rgba(49, 39, 35, 0.92);
+      --border-subtle: rgba(255, 183, 3, 0.15);
+      --border-strong: rgba(255, 107, 107, 0.22);
+
+      --text-main: #fcf6f3;
+      --text-soft: #d8c3bc;
+      --text-muted: #9e8880;
+
+      --card-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255,255,255,0.08);
+      --glow-shadow: 0 12px 35px rgba(255, 158, 0, 0.22);
+    }
+
+    /* =========================================================
+       GLOBAL RESET & AMBIENT ANIMATION
+       ========================================================= */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
-      margin: 0;
       min-height: 100vh;
-      color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, sans-serif;
-      background: 
-        radial-gradient(circle at 15% 15%, rgba(255, 42, 109, 0.18), transparent 30%),
-        radial-gradient(circle at 85% 85%, rgba(255, 159, 28, 0.15), transparent 30%),
-        linear-gradient(135deg, #0d0205 0%, var(--bg) 100%);
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      background-color: var(--bg-base);
+      color: var(--text-main);
       overflow-x: hidden;
+      position: relative;
+      transition: background-color 0.5s var(--ease-fluid), color 0.4s var(--ease-fluid);
+      padding-bottom: 70px;
     }
 
-    button, input, textarea { font: inherit; }
-    button { -webkit-tap-highlight-color: transparent; }
+    h1, h2, h3, .brand-title {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
 
-    /* ---------- Ambient Liquid Orbs ---------- */
-    .ambient {
+    /* Dynamic Fluid Backing Mesh */
+    .ambient-canvas {
       position: fixed;
       inset: 0;
+      z-index: -1;
       pointer-events: none;
       overflow: hidden;
-      z-index: -2;
     }
 
-    .orb {
+    .liquid-blob {
       position: absolute;
-      width: 35rem;
-      height: 35rem;
       border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.25;
-      animation: drift 14s ease-in-out infinite;
+      filter: blur(90px);
+      opacity: 0.85;
+      animation: floatMotion 18s ease-in-out infinite alternate;
     }
 
-    .orb.one { top: -10rem; left: -10rem; background: var(--accent-juice); }
-    .orb.two { bottom: -10rem; right: -10rem; background: var(--accent-mango); animation-delay: -5s; }
-
-    @keyframes drift {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(30px, -20px) scale(1.1); }
+    .blob-mango {
+      width: 45vw;
+      height: 45vw;
+      top: -15vw;
+      left: -10vw;
+      background: radial-gradient(circle, var(--bg-mesh-1) 0%, transparent 70%);
     }
 
-    /* ---------- Main Shell & Multi-View Router ---------- */
-    .wrap {
-      width: min(1100px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 24px 0 48px;
+    .blob-apple {
+      width: 48vw;
+      height: 48vw;
+      bottom: -10vw;
+      right: -10vw;
+      background: radial-gradient(circle, var(--bg-mesh-2) 0%, transparent 70%);
+      animation-delay: -6s;
     }
 
-    .glass {
-      border: 1px solid var(--line);
+    .blob-mint {
+      width: 35vw;
+      height: 35vw;
+      top: 40%;
+      left: 35%;
+      background: radial-gradient(circle, var(--bg-mesh-3) 0%, transparent 70%);
+      animation-delay: -12s;
+    }
+
+    @keyframes floatMotion {
+      0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
+      50% { transform: translate3d(50px, 40px, 0) scale(1.08) rotate(15deg); }
+      100% { transform: translate3d(-30px, 70px, 0) scale(0.95) rotate(-10deg); }
+    }
+
+    /* =========================================================
+       LAYOUT CONTAINER
+       ========================================================= */
+    .app-shell {
+      width: min(1120px, calc(100% - 36px));
+      margin: 28px auto 0;
+    }
+
+    /* Glass Panels */
+    .glass-card {
       background: var(--surface);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-      box-shadow: var(--shadow);
-      border-radius: var(--radius-xl);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-2xl);
+      box-shadow: var(--card-shadow);
+      transition: transform 0.4s var(--ease-fluid), border-color 0.4s ease, box-shadow 0.4s ease;
+      position: relative;
     }
 
-    /* ---------- Navigation Bar / Main Menu ---------- */
-    .topbar {
-      padding: 16px 24px;
+    /* =========================================================
+       FLOATING HEADER & SMART MENU
+       ========================================================= */
+    .header-bar {
+      padding: 14px 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 24px;
+      margin-bottom: 28px;
+      position: sticky;
+      top: 18px;
+      z-index: 100;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
     }
 
-    .brand {
+    .brand-wrap {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
+      text-decoration: none;
+      color: inherit;
     }
 
-    .logo {
+    .brand-emblem {
       width: 48px;
       height: 48px;
       border-radius: 16px;
+      background: linear-gradient(135deg, var(--mango-core), var(--apple-crisp));
       display: grid;
       place-items: center;
       font-size: 24px;
-      background: linear-gradient(135deg, var(--accent-juice), var(--accent-mango));
-      box-shadow: 0 8px 20px rgba(255, 42, 109, 0.4);
-      animation: pulseLogo 3s ease-in-out infinite;
-    }
-
-    @keyframes pulseLogo {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-
-    .brand h1 { margin: 0; font-size: 18px; letter-spacing: .02em; }
-    .brand p { margin: 2px 0 0; color: var(--muted); font-size: 11px; }
-
-    .nav-menu {
-      display: flex;
-      gap: 8px;
-      background: rgba(0, 0, 0, 0.3);
-      padding: 6px;
-      border-radius: 999px;
-      border: 1px solid var(--line);
-    }
-
-    .nav-btn {
-      background: transparent;
-      border: none;
-      color: var(--muted);
-      padding: 10px 20px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: color .3s ease, background .3s ease;
-    }
-
-    .nav-btn.active {
-      background: linear-gradient(135deg, var(--accent-juice), var(--accent-mango));
       color: #fff;
-      box-shadow: 0 4px 15px rgba(255, 42, 109, 0.4);
-    }
-
-    /* ---------- View System ---------- */
-    .app-view {
-      display: none;
-      animation: fadeIn .5s var(--ease) forwards;
-    }
-
-    .app-view.active {
-      display: block;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(12px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* ---------- Liquid Fill Button Effect ---------- */
-    .btn {
+      box-shadow: var(--glow-shadow);
       position: relative;
-      isolation: isolate;
-      min-height: 48px;
-      padding: 0 24px;
-      border: 0;
-      border-radius: 16px;
-      cursor: pointer;
       overflow: hidden;
-      color: #fff;
-      background: linear-gradient(135deg, var(--accent-juice), var(--accent-mango));
-      font-weight: 800;
-      box-shadow: 0 10px 25px rgba(255, 42, 109, 0.3);
-      transition: transform .2s var(--ease), box-shadow .2s ease;
+      animation: emblemBreathe 4s ease-in-out infinite;
     }
 
-    .btn::before {
+    .brand-emblem::after {
       content: "";
       position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, #ff9f1c, #ff2a6d);
-      transform: translateY(100%);
-      transition: transform .4s var(--ease);
-      z-index: -1;
+      inset: -50%;
+      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.4), transparent);
+      transform: rotate(45deg) translateY(-100%);
+      animation: shineLight 5s infinite;
     }
 
-    .btn:hover::before {
-      transform: translateY(0);
+    @keyframes emblemBreathe {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.05) rotate(3deg); }
     }
 
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 30px rgba(255, 42, 109, 0.45);
+    @keyframes shineLight {
+      0%, 75% { transform: rotate(45deg) translateY(-100%); }
+      100% { transform: rotate(45deg) translateY(100%); }
     }
 
-    .btn:active { transform: scale(0.97); }
+    .brand-title {
+      font-size: 20px;
+      line-height: 1.1;
+      background: linear-gradient(135deg, var(--mango-core), var(--apple-crisp));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-    .btn.secondary {
+    .brand-subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Apple-styled Pill Tabs */
+    .tab-navigator {
+      display: flex;
+      padding: 5px;
+      border-radius: var(--radius-full);
+      background: rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border-subtle);
+    }
+
+    [data-theme="dark"] .tab-navigator {
       background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--line);
-      color: var(--text);
-      box-shadow: none;
     }
 
-    /* RESET FORM BUTTON: Custom Juice Drain/Decrease Animation Effect */
-    .btn.secondary::before {
-      background: linear-gradient(135deg, rgba(255,42,109,0.2), rgba(255,159,28,0.2));
-      transform: translateY(0%);
-      transition: transform .4s var(--ease);
+    .nav-pill {
+      border: none;
+      background: transparent;
+      padding: 9px 20px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-soft);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s var(--ease-fluid);
     }
 
-    .btn.secondary:hover::before {
-      transform: translateY(70%); /* Decreases juice level display on hover */
+    .nav-pill:hover {
+      color: var(--text-main);
     }
 
-    .btn.danger {
-      background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    .nav-pill.active {
+      background: linear-gradient(135deg, var(--mango-core), var(--apple-crisp));
+      color: #fff;
+      box-shadow: 0 4px 18px rgba(230, 57, 70, 0.35);
+      transform: translateY(-1px);
     }
 
-    /* ---------- Cards & Layouts ---------- */
-    .card {
-      padding: 32px;
-      margin-bottom: 20px;
+    /* Mode Switch Icon Button */
+    .theme-toggle {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid var(--border-subtle);
+      background: var(--surface);
+      color: var(--text-main);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      font-size: 18px;
+      transition: all 0.3s var(--ease-bounce);
     }
 
-    .card-header {
+    .theme-toggle:hover {
+      transform: scale(1.1) rotate(15deg);
+      border-color: var(--mango-core);
+    }
+
+    /* =========================================================
+       ANIMATED VIEW ROUTING
+       ========================================================= */
+    .view-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(18px) scale(0.99);
+      transition: opacity 0.4s var(--ease-fluid), transform 0.4s var(--ease-fluid);
+    }
+
+    .view-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .grid-duo {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* Section Cards Inner */
+    .card-body {
+      padding: 34px;
+    }
+
+    .badge-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      background: rgba(255, 158, 0, 0.12);
+      border: 1px solid rgba(255, 158, 0, 0.3);
+      color: var(--mango-core);
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+
+    .card-title {
+      font-size: 26px;
+      margin-bottom: 6px;
+    }
+
+    .card-desc {
+      color: var(--text-soft);
+      font-size: 14px;
+      line-height: 1.5;
       margin-bottom: 24px;
     }
 
-    .section-kicker {
-      display: inline-block;
-      margin-bottom: 6px;
-      color: var(--accent-juice);
-      font-size: 11px;
-      font-weight: 850;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-    }
-
-    .card h2 { margin: 0; font-size: 24px; }
-    .sub { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
-
-    .grid-2 {
+    /* =========================================================
+       FORM & LIQUID CONTROLS
+       ========================================================= */
+    .juice-form {
       display: grid;
-      grid-template-columns: 1fr 1fr;
       gap: 20px;
     }
 
-    /* ---------- Form Controls ---------- */
-    .form { display: grid; gap: 18px; }
-
-    label {
+    .form-group {
       display: grid;
-      gap: 8px;
-      color: var(--text-soft);
+      gap: 9px;
+    }
+
+    .form-group label {
       font-size: 12px;
       font-weight: 700;
+      color: var(--text-soft);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
-    input, textarea {
+    .input-wrap {
+      position: relative;
+    }
+
+    .juice-input {
       width: 100%;
-      border: 1px solid var(--line);
-      border-radius: 16px;
-      padding: 14px 16px;
-      color: var(--text);
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(255, 255, 255, 0.45);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 14px 18px;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--text-main);
       outline: none;
-      transition: border-color .25s ease, box-shadow .25s ease;
+      transition: all 0.3s var(--ease-fluid);
     }
 
-    input:focus, textarea:focus {
-      border-color: var(--accent-juice);
-      box-shadow: 0 0 0 4px rgba(255, 42, 109, 0.15);
+    [data-theme="dark"] .juice-input {
+      background: rgba(0, 0, 0, 0.25);
     }
 
-    textarea { min-height: 120px; resize: vertical; }
+    .juice-input:focus {
+      border-color: var(--apple-soft);
+      background: var(--surface-solid);
+      box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.15);
+      transform: translateY(-1px);
+    }
 
-    .char-count { color: var(--muted); text-align: right; font-size: 10px; }
+    textarea.juice-input {
+      min-height: 110px;
+      resize: vertical;
+    }
 
-    /* ---------- Rating Component ---------- */
-    .rating-box {
-      padding: 14px;
-      border-radius: 18px;
-      border: 1px solid var(--line);
+    .field-hint {
+      display: flex;
+      justify-content: flex-end;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
+
+    /* Interactive Rating Stars */
+    .rating-station {
+      background: rgba(255, 255, 255, 0.35);
+      border: 1.5px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    [data-theme="dark"] .rating-station {
       background: rgba(0, 0, 0, 0.2);
     }
 
-    .stars { display: flex; gap: 8px; }
+    .star-cluster {
+      display: flex;
+      gap: 6px;
+    }
 
     .star-btn {
       width: 44px;
       height: 44px;
-      border: 1px solid var(--line);
-      border-radius: 12px;
-      background: transparent;
-      color: rgba(255, 159, 28, 0.3);
+      border-radius: 14px;
+      border: 1.5px solid var(--border-subtle);
+      background: var(--surface);
+      color: rgba(255, 183, 3, 0.35);
       cursor: pointer;
-      font-size: 18px;
+      font-size: 20px;
       display: grid;
       place-items: center;
-      transition: all .2s ease;
+      transition: all 0.25s var(--ease-bounce);
     }
 
-    .star-btn:hover, .star-btn.active {
-      color: var(--accent-mango);
-      background: rgba(255, 159, 28, 0.15);
-      border-color: var(--accent-mango);
+    .star-btn:hover {
+      transform: scale(1.15) translateY(-2px);
+      color: var(--mango-glow);
+      border-color: var(--mango-core);
+    }
+
+    .star-btn.active {
+      color: var(--mango-core);
+      background: rgba(255, 158, 0, 0.12);
+      border-color: var(--mango-core);
       transform: scale(1.05);
+      box-shadow: 0 4px 12px rgba(255, 158, 0, 0.2);
     }
 
-    .rating-copy { margin-top: 8px; color: var(--muted); font-size: 11px; }
-    .rating-copy strong { color: var(--text); }
+    .rating-caption {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-soft);
+    }
 
-    /* ---------- QR Code Hub ---------- */
-    .qr-container {
+    .rating-caption span {
+      color: var(--apple-crisp);
+    }
+
+    /* =========================================================
+       PEAK LEVEL BUTTONS (LIQUID DRIP & RIPPLING SURGE)
+       ========================================================= */
+    .btn-liquid {
+      position: relative;
+      isolation: isolate;
+      min-height: 52px;
+      padding: 0 28px;
+      border-radius: var(--radius-xl);
+      border: 0;
+      cursor: pointer;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.01em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      overflow: hidden;
+      transition: all 0.35s var(--ease-fluid);
+      text-decoration: none;
+    }
+
+    /* Primary Mango-Apple Fusion Button */
+    .btn-liquid.primary {
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--mango-core) 0%, var(--apple-crisp) 100%);
+      box-shadow: 0 10px 28px -5px rgba(230, 57, 70, 0.45);
+    }
+
+    .btn-liquid.primary::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--apple-soft), var(--mango-glow));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      z-index: -1;
+    }
+
+    .btn-liquid.primary:hover {
+      transform: translateY(-3px) scale(1.01);
+      box-shadow: 0 16px 35px -5px rgba(230, 57, 70, 0.55);
+    }
+
+    .btn-liquid.primary:hover::before {
+      opacity: 1;
+    }
+
+    .btn-liquid:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    /* Subtle Glass Secondary Button */
+    .btn-liquid.secondary {
+      background: rgba(255, 255, 255, 0.5);
+      border: 1.5px solid var(--border-subtle);
+      color: var(--text-main);
+    }
+
+    [data-theme="dark"] .btn-liquid.secondary {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .btn-liquid.secondary:hover {
+      background: var(--surface-solid);
+      border-color: var(--apple-soft);
+      transform: translateY(-2px);
+    }
+
+    .btn-liquid.danger {
+      background: linear-gradient(135deg, #ef4444, #dc2626);
+      color: white;
+      box-shadow: 0 8px 25px -4px rgba(220, 38, 38, 0.4);
+    }
+
+    .btn-liquid.danger:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px rgba(220, 38, 38, 0.5);
+    }
+
+    .action-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    /* =========================================================
+       QR HUB (STANDALONE VISUAL STATION)
+       ========================================================= */
+    .qr-hero-card {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 30px;
-      background: rgba(0, 0, 0, 0.25);
-      border-radius: 20px;
-      border: 1px solid var(--line);
       text-align: center;
     }
 
-    .qr-preview {
-      background: #fff;
-      padding: 16px;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-      margin-bottom: 16px;
+    .qr-capsule {
+      position: relative;
+      padding: 18px;
+      background: #ffffff;
+      border-radius: 28px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+      border: 2px dashed rgba(255, 158, 0, 0.4);
+      margin: 10px 0 22px;
+      transition: transform 0.4s var(--ease-bounce);
     }
 
-    .qr-preview img { width: 180px; height: 180px; display: block; }
-
-    /* ---------- Dashboard Area ---------- */
-    .dashboard-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
+    .qr-capsule:hover {
+      transform: scale(1.04) rotate(1deg);
     }
 
-    .count {
-      padding: 6px 12px;
-      border-radius: 999px;
-      background: rgba(255, 42, 109, 0.1);
-      border: 1px solid var(--line);
-      color: var(--text-soft);
-      font-size: 11px;
-      font-weight: 800;
-    }
-
-    .reviews-list {
-      display: grid;
-      gap: 12px;
-      max-height: 400px;
-      overflow-y: auto;
-    }
-
-    .review-item {
-      padding: 16px;
+    .qr-capsule img {
+      width: 190px;
+      height: 190px;
+      display: block;
       border-radius: 16px;
-      border: 1px solid var(--line);
+    }
+
+    .qr-tagline {
+      font-size: 13px;
+      color: var(--text-soft);
+      line-height: 1.5;
+      margin-bottom: 20px;
+    }
+
+    .qr-status-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--lime-fresh);
+      background: rgba(6, 214, 160, 0.1);
+      padding: 4px 12px;
+      border-radius: var(--radius-full);
+      margin-bottom: 15px;
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--lime-fresh);
+      border-radius: 50%;
+      animation: dotBlink 1.6s ease-in-out infinite;
+    }
+
+    @keyframes dotBlink {
+      0%, 100% { opacity: 0.4; transform: scale(0.9); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    /* =========================================================
+       OWNER DASHBOARD & PROTECTED QR MANAGEMENT
+       ========================================================= */
+    .lock-box {
+      max-width: 440px;
+      margin: 20px auto;
+      text-align: center;
+      padding: 30px;
+      border-radius: var(--radius-2xl);
+      background: rgba(255, 255, 255, 0.4);
+      border: 1px solid var(--border-subtle);
+    }
+
+    [data-theme="dark"] .lock-box {
       background: rgba(0, 0, 0, 0.2);
     }
 
-    .review-top { display: flex; justify-content: space-between; font-size: 13px; font-weight: 800; }
-    .review-time { color: var(--muted); font-size: 10px; font-weight: 400; }
-    .review-stars { color: var(--accent-mango); font-size: 12px; margin: 6px 0; }
-    .review-text { color: var(--text-soft); font-size: 12px; line-height: 1.5; }
-    .empty { padding: 30px; text-align: center; color: var(--muted); border: 1px dashed var(--line); border-radius: 16px; }
+    .lock-icon-wrap {
+      width: 60px;
+      height: 60px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--mango-core), var(--apple-crisp));
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 26px;
+      margin: 0 auto 16px;
+      box-shadow: var(--glow-shadow);
+    }
 
-    /* ---------- Toast Notifications (UNTOUCHED) ---------- */
+    .lock-box h3 {
+      font-size: 19px;
+      margin-bottom: 8px;
+    }
+
+    .lock-box p {
+      font-size: 13px;
+      color: var(--text-soft);
+      margin-bottom: 20px;
+    }
+
+    .protected-hub {
+      display: none;
+      animation: fadeInOwner 0.5s var(--ease-fluid) forwards;
+    }
+
+    .protected-hub.active {
+      display: block;
+    }
+
+    @keyframes fadeInOwner {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .admin-sub-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+
+    .owner-qr-box {
+      background: rgba(255, 255, 255, 0.4);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-2xl);
+      padding: 24px;
+    }
+
+    [data-theme="dark"] .owner-qr-box {
+      background: rgba(0, 0, 0, 0.25);
+    }
+
+    /* Review Stream List */
+    .stream-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .stream-pill {
+      font-size: 12px;
+      font-weight: 800;
+      padding: 5px 14px;
+      border-radius: var(--radius-full);
+      background: rgba(230, 57, 70, 0.12);
+      color: var(--apple-crisp);
+    }
+
+    .reviews-stream {
+      display: grid;
+      gap: 14px;
+      max-height: 480px;
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+
+    .review-bubble {
+      background: var(--surface);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 18px 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+      transition: all 0.3s ease;
+    }
+
+    .review-bubble:hover {
+      border-color: var(--mango-core);
+      transform: translateX(4px);
+    }
+
+    .bubble-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .bubble-author {
+      font-weight: 800;
+      font-size: 14px;
+      color: var(--text-main);
+    }
+
+    .bubble-date {
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .bubble-stars {
+      color: var(--mango-core);
+      font-size: 13px;
+      margin-bottom: 8px;
+    }
+
+    .bubble-msg {
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--text-soft);
+      word-break: break-word;
+    }
+
+    .empty-state {
+      padding: 40px 20px;
+      text-align: center;
+      color: var(--text-muted);
+      border: 2px dashed var(--border-subtle);
+      border-radius: var(--radius-xl);
+      font-size: 14px;
+    }
+
+    /* =========================================================
+       TOAST SYSTEM (ACCESSIBLE FLOATING ALERTS)
+       ========================================================= */
     .toast-region {
       position: fixed;
-      right: 20px;
-      bottom: 20px;
-      z-index: 2000;
-      display: grid;
+      bottom: 24px;
+      right: 24px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
       gap: 10px;
-      width: min(360px, calc(100% - 40px));
+      width: min(380px, calc(100% - 48px));
+      pointer-events: none;
     }
 
     .toast {
+      pointer-events: auto;
       display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      padding: 14px;
-      border-radius: 17px;
-      border: 1px solid var(--line);
-      background: var(--surface-strong);
-      backdrop-filter: blur(20px);
-      box-shadow: 0 18px 50px rgba(0,0,0,0.3);
-      animation: toastIn .45s var(--ease) both;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border-radius: var(--radius-xl);
+      background: var(--surface-elevated);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 1px solid var(--border-strong);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+      animation: toastSlideIn 0.4s var(--ease-bounce) forwards;
+      color: var(--text-main);
     }
 
-    @keyframes toastIn {
-      from { opacity: 0; transform: translateY(14px) scale(.98); }
+    .toast.out {
+      animation: toastSlideOut 0.3s var(--ease-fluid) forwards;
+    }
+
+    @keyframes toastSlideIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.9); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    .toast.out { animation: toastOut .35s var(--ease) forwards; }
-    @keyframes toastOut { to { opacity: 0; transform: translateY(8px) scale(.97); } }
+    @keyframes toastSlideOut {
+      to { opacity: 0; transform: translateY(10px) scale(0.95); }
+    }
 
     .toast-icon {
-      width: 30px; height: 30px;
-      flex: 0 0 auto;
-      border-radius: 10px;
-      display: grid; place-items: center;
-      background: rgba(255, 42, 109, 0.15);
-      color: var(--accent-juice);
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--mango-core), var(--apple-crisp));
+      color: #fff;
+      display: grid;
+      place-items: center;
+      font-size: 16px;
+      font-weight: bold;
+      flex-shrink: 0;
     }
-    .toast strong { display: block; font-size: 12px; }
-    .toast span { display: block; margin-top: 2px; color: var(--muted); font-size: 11px; }
 
-    .footer { padding: 24px 0 0; text-align: center; color: var(--muted); font-size: 11px; }
+    .toast-title {
+      font-size: 13px;
+      font-weight: 800;
+    }
 
-    @media (max-width: 768px) {
-      .grid-2 { grid-template-columns: 1fr; }
-      .topbar { flex-direction: column; align-items: stretch; }
-      .nav-menu { justify-content: center; }
+    .toast-desc {
+      font-size: 12px;
+      color: var(--text-soft);
+      margin-top: 2px;
+    }
+
+    /* Scrollbars */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--mango-core); }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .grid-duo { grid-template-columns: 1fr; }
+      .admin-sub-grid { grid-template-columns: 1fr; }
+      .header-bar { flex-direction: column; gap: 14px; align-items: stretch; }
+      .header-actions { justify-content: space-between; }
+      .card-body { padding: 24px; }
+      .action-row { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 
 <body>
-  <div class="ambient" aria-hidden="true">
-    <div class="orb one"></div>
-    <div class="orb two"></div>
+  <!-- Ambient Liquid Fruits Canvas -->
+  <div class="ambient-canvas" aria-hidden="true">
+    <div class="liquid-blob blob-mango"></div>
+    <div class="liquid-blob blob-apple"></div>
+    <div class="liquid-blob blob-mint"></div>
   </div>
 
-  <main class="wrap">
-    <!-- Top Navigation Main Menu Selector -->
-    <header class="topbar glass">
-      <div class="brand">
-        <div class="logo" aria-hidden="true">🍹</div>
+  <main class="app-shell">
+    <!-- Floating Apple-styled Header & Menu Navigation -->
+    <header class="header-bar glass-card">
+      <div class="brand-wrap">
+        <div class="brand-emblem" aria-hidden="true">🍹</div>
         <div>
-          <h1>Juice Bike Hub</h1>
-          <p>Fresh Liquid Experience & Feedback System</p>
+          <h1 class="brand-title">Juice Bike Hub</h1>
+          <p class="brand-subtitle">Fresh Mango & Apple Blend Station</p>
         </div>
       </div>
 
-      <nav class="nav-menu" role="tablist">
-        <button class="nav-btn active" role="tab" data-target="view-reviews">Reviews & QR</button>
-        <button class="nav-btn" role="tab" data-target="view-dashboard">Owner Dashboard</button>
-      </nav>
+      <div class="header-actions">
+        <nav class="tab-navigator" role="tablist">
+          <button class="nav-pill active" data-view="view-customer" role="tab" aria-selected="true">
+            <span>✨</span> Experience
+          </button>
+          <button class="nav-pill" data-view="view-owner" role="tab" aria-selected="false">
+            <span>🔐</span> Manager
+          </button>
+        </nav>
+
+        <button class="theme-toggle" id="themeToggleBtn" title="Toggle Mild Dark / Light Mode" aria-label="Toggle Theme">
+          <span id="themeIcon">🌙</span>
+        </button>
+      </div>
     </header>
 
-    <!-- VIEW 1: Customer Review Submission & QR Generator -->
-    <section id="view-reviews" class="app-view active">
-      <div class="grid-2">
-        <!-- Leave Review Card -->
-        <article class="card glass">
-          <div class="card-header">
-            <span class="section-kicker">Customer Experience</span>
-            <h2>Leave a Review</h2>
-            <p class="sub">Share your feedback on our fresh juice blend.</p>
-          </div>
+    <!-- =========================================================
+         VIEW 1: CUSTOMER REVIEWS & PUBLIC QR SCAN DISPLAY
+         ========================================================= -->
+    <section id="view-customer" class="view-content active">
+      <div class="grid-duo">
+        <!-- Review Submission Card -->
+        <article class="glass-card card-body">
+          <span class="badge-label">Fresh Feedback</span>
+          <h2 class="card-title">Taste the Experience</h2>
+          <p class="card-desc">How was your fresh fruit juice shot today? Leave your rating and thoughts below.</p>
 
-          <form class="form" id="reviewForm">
-            <label>
-              Your Name
-              <input id="name" type="text" maxlength="40" placeholder="e.g. Jordan" required />
-            </label>
+          <form id="reviewForm" class="juice-form">
+            <div class="form-group">
+              <label for="userName">Customer Name</label>
+              <input id="userName" class="juice-input" type="text" maxlength="40" placeholder="e.g. Alex Green" required />
+            </div>
 
-            <label>
-              Rating
-              <div class="rating-box">
-                <div class="stars" id="stars" role="radiogroup">
-                  <button class="star-btn" type="button" data-value="1">★</button>
-                  <button class="star-btn" type="button" data-value="2">★</button>
-                  <button class="star-btn" type="button" data-value="3">★</button>
-                  <button class="star-btn" type="button" data-value="4">★</button>
-                  <button class="star-btn" type="button" data-value="5">★</button>
+            <div class="form-group">
+              <label>Flavor Rating</label>
+              <div class="rating-station">
+                <div class="star-cluster" id="starCluster" role="radiogroup" aria-label="Rating Stars">
+                  <button type="button" class="star-btn" data-score="1" aria-label="1 star">★</button>
+                  <button type="button" class="star-btn" data-score="2" aria-label="2 stars">★</button>
+                  <button type="button" class="star-btn" data-score="3" aria-label="3 stars">★</button>
+                  <button type="button" class="star-btn" data-score="4" aria-label="4 stars">★</button>
+                  <button type="button" class="star-btn active" data-score="5" aria-label="5 stars">★</button>
                 </div>
-                <div class="rating-copy" id="ratingCopy"><strong>5/5</strong> — Amazing</div>
+                <div class="rating-caption" id="ratingVerdict"><strong>5 / 5</strong> — <span>Peak Sweetness!</span></div>
               </div>
-            </label>
+            </div>
 
-            <label>
-              Your Review
-              <textarea id="review" maxlength="500" placeholder="How was the flavor and ride?" required></textarea>
-              <span class="char-count" id="charCount">0 / 500</span>
-            </label>
+            <div class="form-group">
+              <label for="userReview">Your Tasting Notes</label>
+              <textarea id="userReview" class="juice-input" maxlength="500" placeholder="Describe the aroma, texture, and refreshing taste..." required></textarea>
+              <div class="field-hint"><span id="charTracker">0</span> / 500 characters</div>
+            </div>
 
-            <div class="actions" style="display: flex; gap: 10px;">
-              <button class="btn" type="submit" style="flex: 2;">Submit Review ↗</button>
-              <button class="btn secondary" id="clearCustomer" type="button" style="flex: 1;">Reset</button>
+            <div class="action-row">
+              <button type="submit" class="btn-liquid primary">Submit Tasting Review 🍹</button>
+              <button type="button" id="resetFormBtn" class="btn-liquid secondary">Reset</button>
             </div>
           </form>
         </article>
 
-        <!-- QR Code Section Page Component -->
-        <article class="card glass">
-          <div class="card-header">
-            <span class="section-kicker">Marketing Tools</span>
-            <h2>QR Code Station</h2>
-            <p class="sub">Generate a scannable juice-link for instant customer access.</p>
+        <!-- Public Scannable QR Station -->
+        <aside class="glass-card card-body qr-hero-card">
+          <span class="badge-label">Quick Scan Hub</span>
+          <h2 class="card-title">Mobile Link Station</h2>
+          <p class="qr-tagline">Scan with your phone camera to open our online menu and instant review form.</p>
+
+          <div class="qr-status-indicator">
+            <span class="pulse-dot"></span> Live Scannable Barcode
           </div>
 
-          <div class="qr-container">
-            <div class="qr-preview">
-              <img id="qrImage" src="" alt="Dynamic QR Code" />
+          <div class="qr-capsule">
+            <img id="qrDisplayImage" src="" alt="Juice Bike Official QR Code" />
+          </div>
+
+          <a id="downloadQrBtn" class="btn-liquid secondary" download="juice-bike-scan.png" style="width: 100%;">
+            Download QR Code ⬇
+          </a>
+        </aside>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         VIEW 2: OWNER PROTECTED GATE & MANAGEMENT PANEL
+         ========================================================= -->
+    <section id="view-owner" class="view-content">
+      <!-- Passcode Prompt (Hidden when authorized) -->
+      <div class="glass-card lock-box" id="lockPromptBox">
+        <div class="lock-icon-wrap">🔒</div>
+        <h3>Owner Authorization</h3>
+        <p>Enter owner passcode to update the live QR target address and manage customer feedback logs.</p>
+
+        <form id="ownerLoginForm" style="display: grid; gap: 14px;">
+          <input type="password" id="ownerPassInput" class="juice-input" placeholder="Enter owner passcode..." autocomplete="current-password" required />
+          <button type="submit" class="btn-liquid primary" style="width: 100%;">Unlock Station 🗝️</button>
+        </form>
+      </div>
+
+      <!-- Authenticated Private Station -->
+      <div class="protected-hub" id="protectedHub">
+        <div class="admin-sub-grid">
+          <!-- QR Editor (Restricted strictly to owner) -->
+          <div class="owner-qr-box">
+            <span class="badge-label">Owner Privilege</span>
+            <h2 class="card-title" style="font-size: 20px;">Edit Target QR URL</h2>
+            <p class="card-desc" style="font-size: 13px; margin-bottom: 16px;">Change destination link that customers see when scanning the QR Code.</p>
+
+            <form id="qrUpdateForm" style="display: grid; gap: 14px;">
+              <div class="form-group">
+                <label for="newQrUrlInput">Destination Web Link</label>
+                <input type="url" id="newQrUrlInput" class="juice-input" placeholder="https://yourjuicebike.com/menu" required />
+              </div>
+              <button type="submit" class="btn-liquid primary" style="font-size: 13px;">Save & Update Live QR Code ⚡</button>
+            </form>
+          </div>
+
+          <!-- Quick Owner Controls & Statistics -->
+          <div class="owner-qr-box" style="display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <span class="badge-label">Access Control</span>
+              <h2 class="card-title" style="font-size: 20px;">Session Guard</h2>
+              <p class="card-desc" style="font-size: 13px;">Lock dashboard when stepping away to keep customer records secure.</p>
             </div>
-            <div class="form" style="width: 100%; margin-bottom: 14px;">
-              <input id="qrUrlInput" type="text" placeholder="Target URL..." />
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button type="button" id="lockDashboardBtn" class="btn-liquid secondary" style="flex: 1;">Lock Console 🔒</button>
+              <button type="button" id="wipeAllReviewsBtn" class="btn-liquid danger" style="flex: 1;">Clear Reviews 🗑️</button>
             </div>
-            <div style="display: flex; gap: 8px; width: 100%;">
-              <button class="btn" id="generateQrBtn" style="flex: 1; font-size: 12px; padding: 0 10px;">Update QR</button>
-              <a id="downloadQrBtn" class="btn secondary" download="juice-bike-qr.png" style="flex: 1; text-decoration:none; display:grid; place-items:center; font-size: 12px; font-weight:800;">Download</a>
+          </div>
+        </div>
+
+        <!-- Customer Feed Stream -->
+        <article class="glass-card card-body">
+          <div class="stream-header">
+            <div>
+              <h2 class="card-title" style="font-size: 22px;">Recent Customer Tasting Log</h2>
+              <p class="card-desc" style="margin-bottom: 0; font-size: 13px;">Live stream of received feedback.</p>
             </div>
+            <span class="stream-pill" id="reviewCountBadge">0 Reviews</span>
+          </div>
+
+          <div class="reviews-stream" id="reviewsContainer">
+            <!-- Populated via Javascript -->
           </div>
         </article>
       </div>
     </section>
-
-    <!-- VIEW 2: Owner Dashboard Section -->
-    <section id="view-dashboard" class="app-view">
-      <article class="card glass">
-        <div class="card-header">
-          <span class="section-kicker">Management Security</span>
-          <h2>Owner Dashboard</h2>
-          <p class="sub">Unlock to monitor recent customer interactions and feedback (Passcode: 1234).</p>
-        </div>
-
-        <div class="owner-lock" style="margin-bottom: 24px;">
-          <label>
-            Owner Passcode
-            <div style="display: flex; gap: 10px;">
-              <input id="ownerCode" type="password" inputmode="numeric" placeholder="Enter 1234" style="flex: 1;" />
-              <button class="btn" id="unlockOwner" type="button">Unlock</button>
-            </div>
-          </label>
-        </div>
-
-        <div class="dashboard hidden" id="ownerPanel">
-          <div class="dashboard-head">
-            <strong>Customer Feed Stream</strong>
-            <span class="count" id="countLabel">0 items</span>
-          </div>
-
-          <div class="reviews-list" id="reviewsList"></div>
-
-          <div style="margin-top: 20px; display: flex; gap: 10px;">
-            <button class="btn secondary" id="lockOwner" type="button">Lock Dashboard</button>
-            <button class="btn danger" id="clearReviews" type="button">Clear All Reviews</button>
-          </div>
-        </div>
-      </article>
-    </section>
-
-    <footer class="footer">
-      Juice Bike Liquid System • Built with futuristic interactive design.
-    </footer>
   </main>
 
-  <!-- Notification Region (UNTOUCHED) -->
-  <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+  <!-- Notification Toast Container -->
+  <aside class="toast-region" id="toastContainer" aria-live="polite" aria-atomic="true"></aside>
 
   <script>
     (() => {
       "use strict";
 
-      const STORAGE_KEY = "juice_reviews_v3";
-      const OWNER_CODE = "1234";
-      let selectedRating = 5;
+      /* =========================================================
+         CONSTANTS & CREDENTIAL SECURITY
+         ========================================================= */
+      const SECRET_KEY = "Sar.26@1999";
+      const STORAGE_REVIEWS_KEY = "juice_bike_feed_v4";
+      const STORAGE_QR_KEY = "juice_bike_target_url_v4";
+      const STORAGE_THEME_KEY = "juice_bike_theme";
 
-      /* =======================================================
-         NAVIGATION ROUTER (MENU SELECTION)
-         ======================================================= */
-      const navButtons = document.querySelectorAll(".nav-btn");
-      const appViews = document.querySelectorAll(".app-view");
+      let currentRating = 5;
 
-      navButtons.forEach(btn => {
-        btn.addEventListener("click", () => {
-          navButtons.forEach(b => b.classList.remove("active"));
-          appViews.forEach(v => v.classList.remove("active"));
+      /* =========================================================
+         THEME ENGINE (MILD LIGHT / MILD DARK)
+         ========================================================= */
+      const htmlEl = document.documentElement;
+      const themeToggleBtn = document.getElementById("themeToggleBtn");
+      const themeIcon = document.getElementById("themeIcon");
 
-          btn.classList.add("active");
-          const targetView = document.getElementById(btn.dataset.target);
-          if (targetView) targetView.classList.add("active");
-        });
+      function applyTheme(theme) {
+        htmlEl.setAttribute("data-theme", theme);
+        localStorage.setItem(STORAGE_THEME_KEY, theme);
+        themeIcon.textContent = theme === "dark" ? "☀️" : "🌙";
+      }
+
+      const savedTheme = localStorage.getItem(STORAGE_THEME_KEY) || "light";
+      applyTheme(savedTheme);
+
+      themeToggleBtn.addEventListener("click", () => {
+        const nextTheme = htmlEl.getAttribute("data-theme") === "dark" ? "light" : "dark";
+        applyTheme(nextTheme);
       });
 
-      /* =======================================================
-         TOAST NOTIFICATIONS (STRICTLY UNTOUCHED LOGIC)
-         ======================================================= */
-      const toastRegion = document.getElementById("toastRegion");
+      /* =========================================================
+         ACCESSIBLE TOAST NOTIFICATIONS (NO PASSWORDS EXPOSED)
+         ========================================================= */
+      const toastContainer = document.getElementById("toastContainer");
 
-      function showToast(title, message, icon = "✓") {
+      function notify(title, message, icon = "✓") {
         const toast = document.createElement("div");
         toast.className = "toast";
         toast.innerHTML = `
           <div class="toast-icon">${icon}</div>
-          <div>
-            <strong>${escapeHtml(title)}</strong>
-            <span>${escapeHtml(message)}</span>
+          <div style="flex: 1;">
+            <div class="toast-title">${sanitizeHtml(title)}</div>
+            <div class="toast-desc">${sanitizeHtml(message)}</div>
           </div>
         `;
-        toastRegion.appendChild(toast);
+        toastContainer.appendChild(toast);
+
         window.setTimeout(() => {
           toast.classList.add("out");
-          window.setTimeout(() => toast.remove(), 360);
-        }, 2800);
+          window.setTimeout(() => toast.remove(), 320);
+        }, 3000);
       }
 
-      /* =======================================================
-         QR CODE GENERATOR LOGIC
-         ======================================================= */
-      const qrUrlInput = document.getElementById("qrUrlInput");
-      const qrImage = document.getElementById("qrImage");
-      const downloadQrBtn = document.getElementById("downloadQrBtn");
-
-      function updateQRCode(url) {
-        const encoded = encodeURIComponent(url);
-        const src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encoded}`;
-        qrImage.src = src;
-        downloadQrBtn.href = src;
-      }
-
-      const activeUrl = window.location.href.includes("http") ? window.location.href : "https://juice-bike.local";
-      qrUrlInput.value = activeUrl;
-      updateQRCode(activeUrl);
-
-      document.getElementById("generateQrBtn").addEventListener("click", () => {
-        if (qrUrlInput.value.trim()) updateQRCode(qrUrlInput.value.trim());
-      });
-
-      /* =======================================================
-         RATING SYSTEM
-         ======================================================= */
-      const stars = [...document.querySelectorAll(".star-btn")];
-      const ratingCopy = document.getElementById("ratingCopy");
-      const labels = ["Not good", "Could be better", "Good", "Great", "Amazing"];
-
-      function setRating(val) {
-        selectedRating = val;
-        stars.forEach((s, idx) => s.classList.toggle("active", idx < val));
-        ratingCopy.innerHTML = `<strong>${val}/5</strong> — ${labels[val - 1]}`;
-      }
-
-      stars.forEach(btn => {
-        btn.addEventListener("click", () => setRating(Number(btn.dataset.value)));
-      });
-      setRating(5);
-
-      /* =======================================================
-         CHARACTER COUNTER
-         ======================================================= */
-      const reviewInput = document.getElementById("review");
-      const charCount = document.getElementById("charCount");
-      reviewInput.addEventListener("input", () => {
-        charCount.textContent = `${reviewInput.value.length} / 500`;
-      });
-
-      /* =======================================================
-         STORAGE & UTILS
-         ======================================================= */
-      const loadReviews = () => {
-        try {
-          const raw = localStorage.getItem(STORAGE_KEY);
-          return raw ? JSON.parse(raw) : [];
-        } catch { return []; }
-      };
-
-      const saveReviews = items => localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
-
-      function escapeHtml(str) {
+      function sanitizeHtml(str) {
         return String(str)
-          .replaceAll("&", "&amp;")
-          .replaceAll("<", "&lt;")
-          .replaceAll(">", "&gt;")
-          .replaceAll('"', "&quot;")
-          .replaceAll("'", "&#39;");
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
       }
 
-      /* =======================================================
-         CUSTOMER FORM & RESET BUTTON (UNTOUCHED LOGIC)
-         ======================================================= */
-      const form = document.getElementById("reviewForm");
-      const nameInput = document.getElementById("name");
+      /* =========================================================
+         NAVBAR VIEW SWITCHER
+         ========================================================= */
+      const navButtons = document.querySelectorAll(".nav-pill");
+      const viewContainers = document.querySelectorAll(".view-content");
 
-      form.addEventListener("submit", (e) => {
+      navButtons.forEach(btn => {
+        btn.addEventListener("click", () => {
+          const targetId = btn.dataset.view;
+          navButtons.forEach(b => {
+            b.classList.remove("active");
+            b.setAttribute("aria-selected", "false");
+          });
+          viewContainers.forEach(v => v.classList.remove("active"));
+
+          btn.classList.add("active");
+          btn.setAttribute("aria-selected", "true");
+          const targetView = document.getElementById(targetId);
+          if (targetView) targetView.classList.add("active");
+        });
+      });
+
+      /* =========================================================
+         QR SYSTEM (PUBLIC VIEW ONLY - EDIT RESTRICTED TO OWNER)
+         ========================================================= */
+      const qrDisplayImage = document.getElementById("qrDisplayImage");
+      const downloadQrBtn = document.getElementById("downloadQrBtn");
+      const newQrUrlInput = document.getElementById("newQrUrlInput");
+      const qrUpdateForm = document.getElementById("qrUpdateForm");
+
+      function getSavedQrUrl() {
+        return localStorage.getItem(STORAGE_QR_KEY) || (window.location.href.includes("http") ? window.location.href : "https://juice-bike.artisan");
+      }
+
+      function renderQRCode(url) {
+        const encoded = encodeURIComponent(url);
+        const apiSrc = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encoded}&color=2b1e1a&bgcolor=ffffff`;
+        qrDisplayImage.src = apiSrc;
+        downloadQrBtn.href = apiSrc;
+        newQrUrlInput.value = url;
+      }
+
+      // Initialize QR from storage
+      renderQRCode(getSavedQrUrl());
+
+      /* =========================================================
+         INTERACTIVE RATING STARS
+         ========================================================= */
+      const starButtons = document.querySelectorAll(".star-btn");
+      const ratingVerdict = document.getElementById("ratingVerdict");
+      const ratingsMeta = [
+        "Needs more flavor",
+        "Could be sweeter",
+        "Good & refreshing",
+        "Delicious blend",
+        "Peak Sweetness!"
+      ];
+
+      function updateStarVisuals(score) {
+        currentRating = score;
+        starButtons.forEach((star, index) => {
+          star.classList.toggle("active", index < score);
+        });
+        ratingVerdict.innerHTML = `<strong>${score} / 5</strong> — <span>${ratingsMeta[score - 1]}</span>`;
+      }
+
+      starButtons.forEach(btn => {
+        btn.addEventListener("click", () => updateStarVisuals(Number(btn.dataset.score)));
+      });
+
+      /* =========================================================
+         CHARACTER COUNT TRACKER
+         ========================================================= */
+      const reviewTextarea = document.getElementById("userReview");
+      const charTracker = document.getElementById("charTracker");
+
+      reviewTextarea.addEventListener("input", () => {
+        charTracker.textContent = reviewTextarea.value.length;
+      });
+
+      /* =========================================================
+         STORAGE HANDLERS
+         ========================================================= */
+      function fetchReviews() {
+        try {
+          const raw = localStorage.getItem(STORAGE_REVIEWS_KEY);
+          return raw ? JSON.parse(raw) : [];
+        } catch {
+          return [];
+        }
+      }
+
+      function storeReviews(data) {
+        localStorage.setItem(STORAGE_REVIEWS_KEY, JSON.stringify(data));
+      }
+
+      /* =========================================================
+         CUSTOMER FORM SUBMISSION
+         ========================================================= */
+      const reviewForm = document.getElementById("reviewForm");
+      const userNameInput = document.getElementById("userName");
+      const resetFormBtn = document.getElementById("resetFormBtn");
+
+      reviewForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        const name = nameInput.value.trim();
-        const review = reviewInput.value.trim();
+        const author = userNameInput.value.trim();
+        const content = reviewTextarea.value.trim();
 
-        if (!name || !review) {
-          showToast("Complete Form", "Please fill out your name and review.", "!");
+        if (!author || !content) {
+          notify("Incomplete Review", "Please provide both your name and tasting review.", "!");
           return;
         }
 
-        const items = loadReviews();
-        items.push({ name, review, rating: selectedRating, createdAt: new Date().toISOString() });
-        saveReviews(items);
+        const items = fetchReviews();
+        items.unshift({
+          id: Date.now(),
+          name: author,
+          review: content,
+          rating: currentRating,
+          timestamp: new Date().toISOString()
+        });
+        storeReviews(items);
 
-        form.reset();
-        setRating(5);
-        charCount.textContent = "0 / 500";
-        showToast("Review Submitted", "Thanks for tasting our juice bike blend! 🍹");
-        renderOwner();
+        reviewForm.reset();
+        updateStarVisuals(5);
+        charTracker.textContent = "0";
+        notify("Tasting Logged!", "Thank you for supporting Juice Bike! 🥭🍎");
+
+        // Update dashboard if unlocked
+        if (protectedHub.classList.contains("active")) {
+          loadReviewsIntoOwnerStream();
+        }
       });
 
-      document.getElementById("clearCustomer").addEventListener("click", () => {
-        form.reset();
-        setRating(5);
-        charCount.textContent = "0 / 500";
-        showToast("Form Reset", "Ready for a fresh review.", "↻");
+      resetFormBtn.addEventListener("click", () => {
+        reviewForm.reset();
+        updateStarVisuals(5);
+        charTracker.textContent = "0";
+        notify("Form Cleared", "Ready for a fresh review.", "↺");
       });
 
-      /* =======================================================
-         OWNER DASHBOARD LOGIC
-         ======================================================= */
-      const ownerCode = document.getElementById("ownerCode");
-      const ownerPanel = document.getElementById("ownerPanel");
-      const reviewsList = document.getElementById("reviewsList");
-      const countLabel = document.getElementById("countLabel");
+      /* =========================================================
+         OWNER AUTHENTICATION & SECURE QR UPDATER
+         ========================================================= */
+      const ownerLoginForm = document.getElementById("ownerLoginForm");
+      const ownerPassInput = document.getElementById("ownerPassInput");
+      const lockPromptBox = document.getElementById("lockPromptBox");
+      const protectedHub = document.getElementById("protectedHub");
+      const lockDashboardBtn = document.getElementById("lockDashboardBtn");
+      const wipeAllReviewsBtn = document.getElementById("wipeAllReviewsBtn");
+      const reviewsContainer = document.getElementById("reviewsContainer");
+      const reviewCountBadge = document.getElementById("reviewCountBadge");
 
-      function renderOwner() {
-        const items = loadReviews().sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-        countLabel.textContent = `${items.length} item${items.length === 1 ? "" : "s"}`;
+      ownerLoginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        if (ownerPassInput.value === SECRET_KEY) {
+          lockPromptBox.style.display = "none";
+          protectedHub.classList.add("active");
+          ownerPassInput.value = "";
+          loadReviewsIntoOwnerStream();
+          notify("Access Granted", "Manager dashboard unlocked.", "✓");
+        } else {
+          notify("Access Denied", "Incorrect passcode entered.", "✕");
+          ownerPassInput.value = "";
+          ownerPassInput.focus();
+        }
+      });
 
-        if (!items.length) {
-          reviewsList.innerHTML = `<div class="empty">No customer reviews yet.</div>`;
+      lockDashboardBtn.addEventListener("click", () => {
+        protectedHub.classList.remove("active");
+        lockPromptBox.style.display = "block";
+        notify("Session Locked", "Owner control panel is locked.");
+      });
+
+      // ONLY authenticated owner can update QR URL
+      qrUpdateForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const newUrl = newQrUrlInput.value.trim();
+        if (newUrl) {
+          localStorage.setItem(STORAGE_QR_KEY, newUrl);
+          renderQRCode(newUrl);
+          notify("QR Code Updated", "New target link successfully applied! 🚀");
+        }
+      });
+
+      function loadReviewsIntoOwnerStream() {
+        const reviews = fetchReviews();
+        reviewCountBadge.textContent = `${reviews.length} Tasting${reviews.length === 1 ? "" : "s"}`;
+
+        if (!reviews.length) {
+          reviewsContainer.innerHTML = `<div class="empty-state">No feedback recorded yet. Fresh customer reviews will show up here.</div>`;
           return;
         }
 
-        reviewsList.innerHTML = items.map(item => `
-          <div class="review-item">
-            <div class="review-top">
-              <span>${escapeHtml(item.name)}</span>
-              <span class="review-time">${new Date(item.createdAt).toLocaleString()}</span>
+        reviewsContainer.innerHTML = reviews.map(item => `
+          <div class="review-bubble">
+            <div class="bubble-head">
+              <span class="bubble-author">${sanitizeHtml(item.name)}</span>
+              <span class="bubble-date">${new Date(item.timestamp).toLocaleString()}</span>
             </div>
-            <div class="review-stars">${"★".repeat(item.rating)}${"☆".repeat(5 - item.rating)}</div>
-            <div class="review-text">${escapeHtml(item.review)}</div>
+            <div class="bubble-stars">${"★".repeat(item.rating)}${"☆".repeat(5 - item.rating)}</div>
+            <div class="bubble-msg">${sanitizeHtml(item.review)}</div>
           </div>
         `).join("");
       }
 
-      document.getElementById("unlockOwner").addEventListener("click", () => {
-        if (ownerCode.value === OWNER_CODE) {
-          ownerPanel.classList.remove("hidden");
-          renderOwner();
-          showToast("Dashboard Unlocked", "Private reviews feed is active.");
-          ownerCode.value = "";
-        } else {
-          showToast("Access Denied", "Incorrect passcode (use 1234).", "!");
-          ownerCode.select();
-        }
-      });
-
-      document.getElementById("lockOwner").addEventListener("click", () => {
-        ownerPanel.classList.add("hidden");
-        ownerCode.value = "";
-        showToast("Dashboard Locked", "Security view secured.");
-      });
-
-      document.getElementById("clearReviews").addEventListener("click", () => {
-        if (confirm("Delete all reviews?")) {
-          localStorage.removeItem(STORAGE_KEY);
-          renderOwner();
-          showToast("Cleared", "All feedback records wiped.");
+      wipeAllReviewsBtn.addEventListener("click", () => {
+        if (confirm("Are you sure you want to delete all customer reviews? This action cannot be reversed.")) {
+          localStorage.removeItem(STORAGE_REVIEWS_KEY);
+          loadReviewsIntoOwnerStream();
+          notify("Records Wiped", "All review entries have been cleared.", "🗑️");
         }
       });
     })();
