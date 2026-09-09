@@ -3,798 +3,566 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#fff8f0" />
-  <title>Juice Bike — Artisan Liquid Bar</title>
-
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet" />
+  <title>Juice Bike — Liquid Fusion Hub</title>
 
   <style>
     /* =========================================================
-       FRUIT PALETTE SYSTEM (LIGHT & MILD DARK DUAL-ENGINE)
+       FRUIT DUAL THEME (Crisp Apple & Ripe Mango Palette)
        ========================================================= */
-    :root {
-      /* Fruit Tone Colors */
-      --mango-core: #ff9e00;
-      --mango-glow: #ffb703;
-      --apple-crisp: #e63946;
-      --apple-soft: #ff6b6b;
-      --lime-fresh: #06d6a0;
-      --mint-bg: #f0fdf4;
-
-      /* Mild Light Theme (Fresh Smoothie Vibe) */
-      --bg-base: #fdfbf7;
-      --bg-mesh-1: rgba(255, 158, 0, 0.12);
-      --bg-mesh-2: rgba(230, 57, 70, 0.09);
-      --bg-mesh-3: rgba(6, 214, 160, 0.08);
-
+    :root[data-theme="light"] {
+      --bg: #fbf8f3;
+      --bg-alt: #f3ede2;
       --surface: rgba(255, 255, 255, 0.72);
-      --surface-solid: #ffffff;
-      --surface-elevated: rgba(255, 255, 255, 0.88);
-      --border-subtle: rgba(255, 158, 0, 0.18);
-      --border-strong: rgba(230, 57, 70, 0.22);
-
-      --text-main: #2b1e1a;
-      --text-soft: #63504b;
-      --text-muted: #9c857e;
-
-      --card-shadow: 0 20px 50px -10px rgba(224, 102, 51, 0.12), 0 0 1px rgba(0,0,0,0.06);
-      --glow-shadow: 0 12px 35px rgba(255, 158, 0, 0.32);
-
-      --radius-full: 9999px;
-      --radius-2xl: 28px;
-      --radius-xl: 20px;
-      --radius-md: 14px;
-      --ease-fluid: cubic-bezier(0.16, 1, 0.3, 1);
-      --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+      --surface-elevated: rgba(255, 255, 255, 0.9);
+      --border: rgba(230, 92, 92, 0.16);
+      --border-focus: #e63946;
+      --text: #2b1e1a;
+      --text-muted: #7d6e68;
+      --apple: #e63946;
+      --apple-glow: rgba(230, 57, 70, 0.28);
+      --mango: #f77f00;
+      --mango-gold: #fcbf49;
+      --leaf: #2a9d8f;
+      --liquid-gradient: linear-gradient(135deg, #e63946 0%, #f77f00 50%, #fcbf49 100%);
+      --card-shadow: 0 20px 45px -15px rgba(230, 57, 70, 0.12), 0 0 1px 1px rgba(255, 255, 255, 0.8) inset;
+      --glow-orb-1: #ffb703;
+      --glow-orb-2: #ff758f;
     }
 
-    [data-theme="dark"] {
-      /* Mild Dark Theme (Ripe Night Velvet, Not Pitch Black) */
-      --bg-base: #1f1917;
-      --bg-mesh-1: rgba(255, 158, 0, 0.14);
-      --bg-mesh-2: rgba(230, 57, 70, 0.14);
-      --bg-mesh-3: rgba(6, 214, 160, 0.07);
-
-      --surface: rgba(38, 30, 27, 0.75);
-      --surface-solid: #2c221e;
-      --surface-elevated: rgba(49, 39, 35, 0.92);
-      --border-subtle: rgba(255, 183, 3, 0.15);
-      --border-strong: rgba(255, 107, 107, 0.22);
-
-      --text-main: #fcf6f3;
-      --text-soft: #d8c3bc;
-      --text-muted: #9e8880;
-
-      --card-shadow: 0 24px 60px -15px rgba(0, 0, 0, 0.5), 0 0 1px rgba(255,255,255,0.08);
-      --glow-shadow: 0 12px 35px rgba(255, 158, 0, 0.22);
+    :root[data-theme="dark"] {
+      --bg: #1c1514;
+      --bg-alt: #140e0e;
+      --surface: rgba(36, 26, 25, 0.75);
+      --surface-elevated: rgba(46, 34, 33, 0.95);
+      --border: rgba(255, 120, 100, 0.15);
+      --border-focus: #ff6b6b;
+      --text: #fdf5f3;
+      --text-muted: #bda9a3;
+      --apple: #ff5252;
+      --apple-glow: rgba(255, 82, 82, 0.35);
+      --mango: #ffa600;
+      --mango-gold: #ffbe3b;
+      --leaf: #48cae4;
+      --liquid-gradient: linear-gradient(135deg, #ff5252 0%, #ffa600 60%, #ffd166 100%);
+      --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.45), 0 0 1px 1px rgba(255, 255, 255, 0.08) inset;
+      --glow-orb-1: #c95700;
+      --glow-orb-2: #801323;
     }
 
-    /* =========================================================
-       GLOBAL RESET & AMBIENT ANIMATION
-       ========================================================= */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
     body {
       min-height: 100vh;
-      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-      background-color: var(--bg-base);
-      color: var(--text-main);
-      overflow-x: hidden;
+      color: var(--text);
+      background-color: var(--bg);
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      transition: background-color 0.4s ease, color 0.4s ease;
       position: relative;
-      transition: background-color 0.5s var(--ease-fluid), color 0.4s var(--ease-fluid);
-      padding-bottom: 70px;
+      overflow-x: hidden;
     }
 
-    h1, h2, h3, .brand-title {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-    }
-
-    /* Dynamic Fluid Backing Mesh */
-    .ambient-canvas {
+    /* Ambient Fruit Atmosphere Orbs */
+    .ambient {
       position: fixed;
       inset: 0;
-      z-index: -1;
       pointer-events: none;
+      z-index: -1;
       overflow: hidden;
     }
 
-    .liquid-blob {
+    .orb {
       position: absolute;
+      width: min(55vw, 600px);
+      height: min(55vw, 600px);
       border-radius: 50%;
       filter: blur(90px);
-      opacity: 0.85;
-      animation: floatMotion 18s ease-in-out infinite alternate;
+      opacity: 0.35;
+      animation: floatOrb 18s ease-in-out infinite alternate;
     }
 
-    .blob-mango {
-      width: 45vw;
-      height: 45vw;
-      top: -15vw;
-      left: -10vw;
-      background: radial-gradient(circle, var(--bg-mesh-1) 0%, transparent 70%);
+    .orb-1 {
+      top: -15%;
+      left: -10%;
+      background: radial-gradient(circle, var(--glow-orb-1), transparent 70%);
     }
 
-    .blob-apple {
-      width: 48vw;
-      height: 48vw;
-      bottom: -10vw;
-      right: -10vw;
-      background: radial-gradient(circle, var(--bg-mesh-2) 0%, transparent 70%);
-      animation-delay: -6s;
+    .orb-2 {
+      bottom: -15%;
+      right: -10%;
+      background: radial-gradient(circle, var(--glow-orb-2), transparent 70%);
+      animation-delay: -9s;
     }
 
-    .blob-mint {
-      width: 35vw;
-      height: 35vw;
-      top: 40%;
-      left: 35%;
-      background: radial-gradient(circle, var(--bg-mesh-3) 0%, transparent 70%);
-      animation-delay: -12s;
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+      50% { transform: translate(60px, 40px) scale(1.1) rotate(25deg); }
+      100% { transform: translate(-40px, 80px) scale(0.95) rotate(-20deg); }
     }
 
-    @keyframes floatMotion {
-      0% { transform: translate3d(0, 0, 0) scale(1) rotate(0deg); }
-      50% { transform: translate3d(50px, 40px, 0) scale(1.08) rotate(15deg); }
-      100% { transform: translate3d(-30px, 70px, 0) scale(0.95) rotate(-10deg); }
+    /* Layout Shell */
+    .wrap {
+      width: min(1140px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 30px 0 60px;
     }
 
-    /* =========================================================
-       LAYOUT CONTAINER
-       ========================================================= */
-    .app-shell {
-      width: min(1120px, calc(100% - 36px));
-      margin: 28px auto 0;
-    }
-
-    /* Glass Panels */
-    .glass-card {
-      background: var(--surface);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-2xl);
-      box-shadow: var(--card-shadow);
-      transition: transform 0.4s var(--ease-fluid), border-color 0.4s ease, box-shadow 0.4s ease;
-      position: relative;
-    }
-
-    /* =========================================================
-       FLOATING HEADER & SMART MENU
-       ========================================================= */
+    /* Floating Top Glass Bar */
     .header-bar {
-      padding: 14px 22px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      margin-bottom: 28px;
-      position: sticky;
-      top: 18px;
-      z-index: 100;
-      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
+      align-items: center;
+      padding: 14px 28px;
+      border-radius: 999px;
+      background: var(--surface);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      box-shadow: var(--card-shadow);
+      margin-bottom: 36px;
+      gap: 16px;
     }
 
-    .brand-wrap {
+    .brand-cluster {
       display: flex;
       align-items: center;
       gap: 14px;
-      text-decoration: none;
-      color: inherit;
     }
 
-    .brand-emblem {
-      width: 48px;
-      height: 48px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, var(--mango-core), var(--apple-crisp));
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: var(--liquid-gradient);
       display: grid;
       place-items: center;
-      font-size: 24px;
-      color: #fff;
-      box-shadow: var(--glow-shadow);
-      position: relative;
-      overflow: hidden;
-      animation: emblemBreathe 4s ease-in-out infinite;
+      font-size: 22px;
+      box-shadow: 0 8px 20px var(--apple-glow);
+      animation: gentleWobble 6s ease-in-out infinite;
     }
 
-    .brand-emblem::after {
-      content: "";
-      position: absolute;
-      inset: -50%;
-      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.4), transparent);
-      transform: rotate(45deg) translateY(-100%);
-      animation: shineLight 5s infinite;
+    @keyframes gentleWobble {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      33% { transform: rotate(4deg) scale(1.03); }
+      66% { transform: rotate(-4deg) scale(0.98); }
     }
 
-    @keyframes emblemBreathe {
-      0%, 100% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.05) rotate(3deg); }
-    }
-
-    @keyframes shineLight {
-      0%, 75% { transform: rotate(45deg) translateY(-100%); }
-      100% { transform: rotate(45deg) translateY(100%); }
-    }
-
-    .brand-title {
-      font-size: 20px;
-      line-height: 1.1;
-      background: linear-gradient(135deg, var(--mango-core), var(--apple-crisp));
+    .brand-text h1 {
+      font-size: 19px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: var(--liquid-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    .brand-subtitle {
+    .brand-text p {
       font-size: 11px;
       color: var(--text-muted);
-      font-weight: 600;
-      letter-spacing: 0.03em;
+      font-weight: 500;
     }
 
-    .header-actions {
+    .control-cluster {
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    /* Apple-styled Pill Tabs */
-    .tab-navigator {
+    /* Modern Pill Navigation */
+    .nav-pill-group {
       display: flex;
-      padding: 5px;
-      border-radius: var(--radius-full);
-      background: rgba(0, 0, 0, 0.05);
-      border: 1px solid var(--border-subtle);
+      background: var(--bg-alt);
+      padding: 4px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
     }
 
-    [data-theme="dark"] .tab-navigator {
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    .nav-pill {
-      border: none;
+    .nav-btn {
       background: transparent;
-      padding: 9px 20px;
-      border-radius: var(--radius-full);
+      border: none;
+      color: var(--text-muted);
+      padding: 8px 20px;
+      border-radius: 999px;
       font-size: 13px;
       font-weight: 700;
-      color: var(--text-soft);
       cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.3s var(--ease-fluid);
+      transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
     }
 
-    .nav-pill:hover {
-      color: var(--text-main);
+    .nav-btn.active {
+      background: var(--liquid-gradient);
+      color: #ffffff;
+      box-shadow: 0 4px 16px var(--apple-glow);
     }
 
-    .nav-pill.active {
-      background: linear-gradient(135deg, var(--mango-core), var(--apple-crisp));
-      color: #fff;
-      box-shadow: 0 4px 18px rgba(230, 57, 70, 0.35);
-      transform: translateY(-1px);
-    }
-
-    /* Mode Switch Icon Button */
-    .theme-toggle {
-      width: 42px;
-      height: 42px;
+    /* Light/Dark Mode Switcher Button */
+    .mode-toggle {
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      border: 1px solid var(--border-subtle);
+      border: 1px solid var(--border);
       background: var(--surface);
-      color: var(--text-main);
+      color: var(--text);
+      cursor: pointer;
       display: grid;
       place-items: center;
-      cursor: pointer;
       font-size: 18px;
-      transition: all 0.3s var(--ease-bounce);
+      transition: transform 0.25s ease, background 0.25s ease;
     }
 
-    .theme-toggle:hover {
-      transform: scale(1.1) rotate(15deg);
-      border-color: var(--mango-core);
+    .mode-toggle:hover {
+      transform: rotate(20deg) scale(1.08);
     }
 
-    /* =========================================================
-       ANIMATED VIEW ROUTING
-       ========================================================= */
-    .view-content {
-      display: none;
-      opacity: 0;
-      transform: translateY(18px) scale(0.99);
-      transition: opacity 0.4s var(--ease-fluid), transform 0.4s var(--ease-fluid);
-    }
-
-    .view-content.active {
-      display: block;
-      opacity: 1;
-      transform: translateY(0) scale(1);
-    }
-
-    .grid-duo {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 24px;
-      align-items: start;
-    }
-
-    /* Section Cards Inner */
-    .card-body {
+    /* Main Card Scaffolding */
+    .card {
+      background: var(--surface);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid var(--border);
+      border-radius: 28px;
       padding: 34px;
-    }
-
-    .badge-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 5px 12px;
-      border-radius: var(--radius-full);
-      background: rgba(255, 158, 0, 0.12);
-      border: 1px solid rgba(255, 158, 0, 0.3);
-      color: var(--mango-core);
-      font-size: 11px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 12px;
-    }
-
-    .card-title {
-      font-size: 26px;
-      margin-bottom: 6px;
-    }
-
-    .card-desc {
-      color: var(--text-soft);
-      font-size: 14px;
-      line-height: 1.5;
-      margin-bottom: 24px;
-    }
-
-    /* =========================================================
-       FORM & LIQUID CONTROLS
-       ========================================================= */
-    .juice-form {
-      display: grid;
-      gap: 20px;
-    }
-
-    .form-group {
-      display: grid;
-      gap: 9px;
-    }
-
-    .form-group label {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-soft);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .input-wrap {
+      box-shadow: var(--card-shadow);
       position: relative;
     }
 
-    .juice-input {
+    .section-kicker {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--apple);
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+
+    .card h2 {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 4px;
+    }
+
+    .card .sub {
+      color: var(--text-muted);
+      font-size: 13px;
+      margin-bottom: 24px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+    }
+
+    /* Futuristic Liquid Wave Buttons */
+    .btn {
+      position: relative;
+      isolation: isolate;
+      min-height: 48px;
+      padding: 0 24px;
+      border: none;
+      border-radius: 16px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      color: #ffffff;
+      background: var(--liquid-gradient);
+      box-shadow: 0 8px 20px var(--apple-glow);
+      cursor: pointer;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #f77f00, #e63946);
+      transform: translateY(100%);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: -1;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 28px var(--apple-glow);
+    }
+
+    .btn:hover::before {
+      transform: translateY(0);
+    }
+
+    .btn:active {
+      transform: translateY(0) scale(0.98);
+    }
+
+    .btn.secondary {
+      background: var(--bg-alt);
+      color: var(--text);
+      border: 1px solid var(--border);
+      box-shadow: none;
+    }
+
+    .btn.secondary::before {
+      background: var(--border);
+    }
+
+    .btn.danger {
+      background: linear-gradient(135deg, #d90429, #ef233c);
+      box-shadow: 0 8px 20px rgba(217, 4, 41, 0.25);
+    }
+
+    /* Form Fields */
+    .form-group {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    input, textarea {
       width: 100%;
-      background: rgba(255, 255, 255, 0.45);
-      border: 1.5px solid var(--border-subtle);
-      border-radius: var(--radius-xl);
       padding: 14px 18px;
-      font-family: inherit;
-      font-size: 14px;
-      color: var(--text-main);
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      background: var(--bg-alt);
+      color: var(--text);
       outline: none;
-      transition: all 0.3s var(--ease-fluid);
+      font-family: inherit;
+      font-size: 13px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
-    [data-theme="dark"] .juice-input {
-      background: rgba(0, 0, 0, 0.25);
+    input:focus, textarea:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 4px var(--apple-glow);
     }
 
-    .juice-input:focus {
-      border-color: var(--apple-soft);
-      background: var(--surface-solid);
-      box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.15);
-      transform: translateY(-1px);
-    }
-
-    textarea.juice-input {
+    textarea {
       min-height: 110px;
       resize: vertical;
     }
 
-    .field-hint {
-      display: flex;
-      justify-content: flex-end;
+    .char-limit {
       font-size: 11px;
       color: var(--text-muted);
-      font-weight: 600;
     }
 
-    /* Interactive Rating Stars */
-    .rating-station {
-      background: rgba(255, 255, 255, 0.35);
-      border: 1.5px solid var(--border-subtle);
-      border-radius: var(--radius-xl);
-      padding: 16px 20px;
+    /* Interactive Fruit Star Rating */
+    .rating-wrapper {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      padding: 12px 16px;
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
     }
 
-    [data-theme="dark"] .rating-station {
-      background: rgba(0, 0, 0, 0.2);
-    }
-
-    .star-cluster {
+    .star-bar {
       display: flex;
       gap: 6px;
     }
 
-    .star-btn {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      border: 1.5px solid var(--border-subtle);
-      background: var(--surface);
-      color: rgba(255, 183, 3, 0.35);
+    .star-unit {
+      background: transparent;
+      border: 1px solid transparent;
+      font-size: 22px;
+      color: var(--text-muted);
+      opacity: 0.35;
       cursor: pointer;
-      font-size: 20px;
+      border-radius: 10px;
+      width: 36px;
+      height: 36px;
       display: grid;
       place-items: center;
-      transition: all 0.25s var(--ease-bounce);
+      transition: transform 0.15s ease, color 0.15s ease, opacity 0.15s ease;
     }
 
-    .star-btn:hover {
-      transform: scale(1.15) translateY(-2px);
-      color: var(--mango-glow);
-      border-color: var(--mango-core);
-    }
-
-    .star-btn.active {
-      color: var(--mango-core);
-      background: rgba(255, 158, 0, 0.12);
-      border-color: var(--mango-core);
-      transform: scale(1.05);
-      box-shadow: 0 4px 12px rgba(255, 158, 0, 0.2);
-    }
-
-    .rating-caption {
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--text-soft);
-    }
-
-    .rating-caption span {
-      color: var(--apple-crisp);
-    }
-
-    /* =========================================================
-       PEAK LEVEL BUTTONS (LIQUID DRIP & RIPPLING SURGE)
-       ========================================================= */
-    .btn-liquid {
-      position: relative;
-      isolation: isolate;
-      min-height: 52px;
-      padding: 0 28px;
-      border-radius: var(--radius-xl);
-      border: 0;
-      cursor: pointer;
-      font-family: 'Outfit', sans-serif;
-      font-weight: 700;
-      font-size: 15px;
-      letter-spacing: 0.01em;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      overflow: hidden;
-      transition: all 0.35s var(--ease-fluid);
-      text-decoration: none;
-    }
-
-    /* Primary Mango-Apple Fusion Button */
-    .btn-liquid.primary {
-      color: #ffffff;
-      background: linear-gradient(135deg, var(--mango-core) 0%, var(--apple-crisp) 100%);
-      box-shadow: 0 10px 28px -5px rgba(230, 57, 70, 0.45);
-    }
-
-    .btn-liquid.primary::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, var(--apple-soft), var(--mango-glow));
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      z-index: -1;
-    }
-
-    .btn-liquid.primary:hover {
-      transform: translateY(-3px) scale(1.01);
-      box-shadow: 0 16px 35px -5px rgba(230, 57, 70, 0.55);
-    }
-
-    .btn-liquid.primary:hover::before {
+    .star-unit.active, .star-unit:hover {
+      color: var(--mango-gold);
       opacity: 1;
+      transform: scale(1.15);
     }
 
-    .btn-liquid:active {
-      transform: translateY(1px) scale(0.98);
+    .rating-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
     }
 
-    /* Subtle Glass Secondary Button */
-    .btn-liquid.secondary {
-      background: rgba(255, 255, 255, 0.5);
-      border: 1.5px solid var(--border-subtle);
-      color: var(--text-main);
-    }
-
-    [data-theme="dark"] .btn-liquid.secondary {
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    .btn-liquid.secondary:hover {
-      background: var(--surface-solid);
-      border-color: var(--apple-soft);
-      transform: translateY(-2px);
-    }
-
-    .btn-liquid.danger {
-      background: linear-gradient(135deg, #ef4444, #dc2626);
-      color: white;
-      box-shadow: 0 8px 25px -4px rgba(220, 38, 38, 0.4);
-    }
-
-    .btn-liquid.danger:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 28px rgba(220, 38, 38, 0.5);
-    }
-
-    .action-row {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 12px;
-      margin-top: 10px;
-    }
-
-    /* =========================================================
-       QR HUB (STANDALONE VISUAL STATION)
-       ========================================================= */
-    .qr-hero-card {
+    /* Locked QR Station Component */
+    .qr-box {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
     }
 
-    .qr-capsule {
-      position: relative;
-      padding: 18px;
-      background: #ffffff;
-      border-radius: 28px;
-      box-shadow: 0 20px 45px rgba(0,0,0,0.08);
-      border: 2px dashed rgba(255, 158, 0, 0.4);
-      margin: 10px 0 22px;
-      transition: transform 0.4s var(--ease-bounce);
-    }
-
-    .qr-capsule:hover {
-      transform: scale(1.04) rotate(1deg);
-    }
-
-    .qr-capsule img {
-      width: 190px;
-      height: 190px;
-      display: block;
-      border-radius: 16px;
-    }
-
-    .qr-tagline {
-      font-size: 13px;
-      color: var(--text-soft);
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
-
-    .qr-status-indicator {
+    .qr-badge {
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
       font-size: 11px;
-      font-weight: 700;
-      color: var(--lime-fresh);
-      background: rgba(6, 214, 160, 0.1);
+      font-weight: 800;
       padding: 4px 12px;
-      border-radius: var(--radius-full);
-      margin-bottom: 15px;
+      border-radius: 999px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      margin-bottom: 16px;
     }
 
-    .pulse-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--lime-fresh);
-      border-radius: 50%;
-      animation: dotBlink 1.6s ease-in-out infinite;
-    }
-
-    @keyframes dotBlink {
-      0%, 100% { opacity: 0.4; transform: scale(0.9); }
-      50% { opacity: 1; transform: scale(1.2); }
-    }
-
-    /* =========================================================
-       OWNER DASHBOARD & PROTECTED QR MANAGEMENT
-       ========================================================= */
-    .lock-box {
-      max-width: 440px;
-      margin: 20px auto;
-      text-align: center;
-      padding: 30px;
-      border-radius: var(--radius-2xl);
-      background: rgba(255, 255, 255, 0.4);
-      border: 1px solid var(--border-subtle);
-    }
-
-    [data-theme="dark"] .lock-box {
-      background: rgba(0, 0, 0, 0.2);
-    }
-
-    .lock-icon-wrap {
-      width: 60px;
-      height: 60px;
+    .qr-frame {
+      background: #ffffff;
+      padding: 16px;
       border-radius: 20px;
-      background: linear-gradient(135deg, var(--mango-core), var(--apple-crisp));
-      color: #fff;
-      display: grid;
-      place-items: center;
-      font-size: 26px;
-      margin: 0 auto 16px;
-      box-shadow: var(--glow-shadow);
-    }
-
-    .lock-box h3 {
-      font-size: 19px;
-      margin-bottom: 8px;
-    }
-
-    .lock-box p {
-      font-size: 13px;
-      color: var(--text-soft);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
       margin-bottom: 20px;
     }
 
-    .protected-hub {
-      display: none;
-      animation: fadeInOwner 0.5s var(--ease-fluid) forwards;
-    }
-
-    .protected-hub.active {
+    .qr-frame img {
+      width: 170px;
+      height: 170px;
       display: block;
     }
 
-    @keyframes fadeInOwner {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .admin-sub-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin-bottom: 24px;
-    }
-
-    .owner-qr-box {
-      background: rgba(255, 255, 255, 0.4);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-2xl);
-      padding: 24px;
-    }
-
-    [data-theme="dark"] .owner-qr-box {
-      background: rgba(0, 0, 0, 0.25);
-    }
-
-    /* Review Stream List */
-    .stream-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 18px;
-    }
-
-    .stream-pill {
+    .qr-target-display {
       font-size: 12px;
-      font-weight: 800;
-      padding: 5px 14px;
-      border-radius: var(--radius-full);
-      background: rgba(230, 57, 70, 0.12);
-      color: var(--apple-crisp);
+      color: var(--text-muted);
+      word-break: break-all;
+      background: var(--surface);
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      width: 100%;
+      margin-bottom: 14px;
     }
 
-    .reviews-stream {
+    /* Views Switcher Animation */
+    .app-panel {
+      display: none;
+    }
+
+    .app-panel.active {
+      display: block;
+      animation: viewPop 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes viewPop {
+      from { opacity: 0; transform: translateY(12px) scale(0.99); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Reviews Feed & Owner Replying UI */
+    .review-stream {
       display: grid;
-      gap: 14px;
-      max-height: 480px;
+      gap: 16px;
+      max-height: 520px;
       overflow-y: auto;
       padding-right: 6px;
+      margin: 20px 0;
     }
 
-    .review-bubble {
-      background: var(--surface);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-xl);
-      padding: 18px 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
-      transition: all 0.3s ease;
+    .review-card {
+      background: var(--bg-alt);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 20px;
+      transition: border-color 0.2s ease;
     }
 
-    .review-bubble:hover {
-      border-color: var(--mango-core);
-      transform: translateX(4px);
+    .review-card:hover {
+      border-color: var(--mango);
     }
 
-    .bubble-head {
+    .review-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
-    .bubble-author {
+    .review-user {
       font-weight: 800;
       font-size: 14px;
-      color: var(--text-main);
     }
 
-    .bubble-date {
+    .review-meta {
       font-size: 11px;
       color: var(--text-muted);
     }
 
-    .bubble-stars {
-      color: var(--mango-core);
-      font-size: 13px;
+    .review-score {
+      color: var(--mango-gold);
+      font-size: 14px;
       margin-bottom: 8px;
     }
 
-    .bubble-msg {
+    .review-body {
       font-size: 13px;
       line-height: 1.5;
-      color: var(--text-soft);
-      word-break: break-word;
+      color: var(--text);
     }
 
-    .empty-state {
-      padding: 40px 20px;
-      text-align: center;
-      color: var(--text-muted);
-      border: 2px dashed var(--border-subtle);
-      border-radius: var(--radius-xl);
-      font-size: 14px;
+    /* Owner Reply Segment */
+    .owner-reply-box {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: var(--surface-elevated);
+      border-left: 3px solid var(--apple);
     }
 
-    /* =========================================================
-       TOAST SYSTEM (ACCESSIBLE FLOATING ALERTS)
-       ========================================================= */
+    .owner-reply-title {
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--apple);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .owner-reply-content {
+      font-size: 12px;
+      color: var(--text);
+    }
+
+    .owner-action-bar {
+      margin-top: 12px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .reply-input-row {
+      display: flex;
+      gap: 8px;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .hidden { display: none !important; }
+
+    /* Toast Container */
     .toast-region {
       position: fixed;
       bottom: 24px;
@@ -803,530 +571,518 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      width: min(380px, calc(100% - 48px));
+      width: min(340px, calc(100% - 48px));
       pointer-events: none;
     }
 
-    .toast {
-      pointer-events: auto;
+    .toast-pill {
+      background: var(--surface-elevated);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px 18px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
       display: flex;
       align-items: center;
-      gap: 14px;
-      padding: 14px 18px;
-      border-radius: var(--radius-xl);
-      background: var(--surface-elevated);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-      border: 1px solid var(--border-strong);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
-      animation: toastSlideIn 0.4s var(--ease-bounce) forwards;
-      color: var(--text-main);
+      gap: 12px;
+      pointer-events: auto;
+      animation: toastIn 0.35s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     }
 
-    .toast.out {
-      animation: toastSlideOut 0.3s var(--ease-fluid) forwards;
+    .toast-pill.out {
+      animation: toastOut 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
     }
 
-    @keyframes toastSlideIn {
-      from { opacity: 0; transform: translateY(20px) scale(0.9); }
+    @keyframes toastIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.95); }
       to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    @keyframes toastSlideOut {
+    @keyframes toastOut {
       to { opacity: 0; transform: translateY(10px) scale(0.95); }
     }
 
     .toast-icon {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      background: linear-gradient(135deg, var(--mango-core), var(--apple-crisp));
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: var(--liquid-gradient);
       color: #fff;
       display: grid;
       place-items: center;
-      font-size: 16px;
-      font-weight: bold;
+      font-weight: 800;
+      font-size: 14px;
       flex-shrink: 0;
     }
 
-    .toast-title {
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .toast-desc {
+    .toast-details strong {
+      display: block;
       font-size: 12px;
-      color: var(--text-soft);
-      margin-top: 2px;
     }
 
-    /* Scrollbars */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: var(--border-subtle); border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--mango-core); }
+    .toast-details span {
+      display: block;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
 
-    /* Responsive */
-    @media (max-width: 860px) {
-      .grid-duo { grid-template-columns: 1fr; }
-      .admin-sub-grid { grid-template-columns: 1fr; }
-      .header-bar { flex-direction: column; gap: 14px; align-items: stretch; }
-      .header-actions { justify-content: space-between; }
-      .card-body { padding: 24px; }
-      .action-row { grid-template-columns: 1fr; }
+    .footer {
+      text-align: center;
+      padding-top: 36px;
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    @media (max-width: 820px) {
+      .header-bar {
+        border-radius: 24px;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .control-cluster {
+        justify-content: space-between;
+      }
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
-
 <body>
-  <!-- Ambient Liquid Fruits Canvas -->
-  <div class="ambient-canvas" aria-hidden="true">
-    <div class="liquid-blob blob-mango"></div>
-    <div class="liquid-blob blob-apple"></div>
-    <div class="liquid-blob blob-mint"></div>
+
+  <div class="ambient" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
   </div>
 
-  <main class="app-shell">
-    <!-- Floating Apple-styled Header & Menu Navigation -->
-    <header class="header-bar glass-card">
-      <div class="brand-wrap">
-        <div class="brand-emblem" aria-hidden="true">🍹</div>
-        <div>
-          <h1 class="brand-title">Juice Bike Hub</h1>
-          <p class="brand-subtitle">Fresh Mango & Apple Blend Station</p>
+  <main class="wrap">
+    <!-- Top Floating Navigation & Brand Header -->
+    <header class="header-bar">
+      <div class="brand-cluster">
+        <div class="brand-icon" aria-hidden="true">🍎</div>
+        <div class="brand-text">
+          <h1>Juice Bike Hub</h1>
+          <p>Artisanal Cold-Pressed Brews & Real Feedback</p>
         </div>
       </div>
 
-      <div class="header-actions">
-        <nav class="tab-navigator" role="tablist">
-          <button class="nav-pill active" data-view="view-customer" role="tab" aria-selected="true">
-            <span>✨</span> Experience
-          </button>
-          <button class="nav-pill" data-view="view-owner" role="tab" aria-selected="false">
-            <span>🔐</span> Manager
-          </button>
+      <div class="control-cluster">
+        <nav class="nav-pill-group" role="tablist">
+          <button class="nav-btn active" role="tab" data-target="customer-view">Taste & QR</button>
+          <button class="nav-btn" role="tab" data-target="dashboard-view">Owner Suite</button>
         </nav>
-
-        <button class="theme-toggle" id="themeToggleBtn" title="Toggle Mild Dark / Light Mode" aria-label="Toggle Theme">
-          <span id="themeIcon">🌙</span>
-        </button>
+        <button class="mode-toggle" id="themeToggle" title="Toggle Theme" aria-label="Toggle Theme">🥭</button>
       </div>
     </header>
 
-    <!-- =========================================================
-         VIEW 1: CUSTOMER REVIEWS & PUBLIC QR SCAN DISPLAY
-         ========================================================= -->
-    <section id="view-customer" class="view-content active">
-      <div class="grid-duo">
+    <!-- SECTION 1: Customer Review & Public QR Station -->
+    <section id="customer-view" class="app-panel active">
+      <div class="grid-2">
         <!-- Review Submission Card -->
-        <article class="glass-card card-body">
-          <span class="badge-label">Fresh Feedback</span>
-          <h2 class="card-title">Taste the Experience</h2>
-          <p class="card-desc">How was your fresh fruit juice shot today? Leave your rating and thoughts below.</p>
+        <article class="card">
+          <span class="section-kicker">Experience Portal</span>
+          <h2>Drop Your Tasting Notes</h2>
+          <p class="sub">How was your fresh blend on the ride today?</p>
 
-          <form id="reviewForm" class="juice-form">
+          <form id="feedbackForm">
             <div class="form-group">
-              <label for="userName">Customer Name</label>
-              <input id="userName" class="juice-input" type="text" maxlength="40" placeholder="e.g. Alex Green" required />
+              <label for="userName">Your Name</label>
+              <input id="userName" type="text" maxlength="40" placeholder="e.g., Mia Vance" required />
             </div>
 
             <div class="form-group">
-              <label>Flavor Rating</label>
-              <div class="rating-station">
-                <div class="star-cluster" id="starCluster" role="radiogroup" aria-label="Rating Stars">
-                  <button type="button" class="star-btn" data-score="1" aria-label="1 star">★</button>
-                  <button type="button" class="star-btn" data-score="2" aria-label="2 stars">★</button>
-                  <button type="button" class="star-btn" data-score="3" aria-label="3 stars">★</button>
-                  <button type="button" class="star-btn" data-score="4" aria-label="4 stars">★</button>
-                  <button type="button" class="star-btn active" data-score="5" aria-label="5 stars">★</button>
+              <label>Blend Rating</label>
+              <div class="rating-wrapper">
+                <div class="star-bar" id="starBar">
+                  <button type="button" class="star-unit active" data-val="1">★</button>
+                  <button type="button" class="star-unit active" data-val="2">★</button>
+                  <button type="button" class="star-unit active" data-val="3">★</button>
+                  <button type="button" class="star-unit active" data-val="4">★</button>
+                  <button type="button" class="star-unit active" data-val="5">★</button>
                 </div>
-                <div class="rating-caption" id="ratingVerdict"><strong>5 / 5</strong> — <span>Peak Sweetness!</span></div>
+                <div class="rating-label" id="ratingDescriptor">5/5 — Crisp Perfection</div>
               </div>
             </div>
 
             <div class="form-group">
-              <label for="userReview">Your Tasting Notes</label>
-              <textarea id="userReview" class="juice-input" maxlength="500" placeholder="Describe the aroma, texture, and refreshing taste..." required></textarea>
-              <div class="field-hint"><span id="charTracker">0</span> / 500 characters</div>
+              <label for="userReview">
+                <span>Your Review</span>
+                <span class="char-limit" id="charTicker">0 / 400</span>
+              </label>
+              <textarea id="userReview" maxlength="400" placeholder="Tell us about the texture, chill, and fresh notes..." required></textarea>
             </div>
 
-            <div class="action-row">
-              <button type="submit" class="btn-liquid primary">Submit Tasting Review 🍹</button>
-              <button type="button" id="resetFormBtn" class="btn-liquid secondary">Reset</button>
+            <div style="display: flex; gap: 12px;">
+              <button class="btn" type="submit" style="flex: 2;">Publish Review ↗</button>
+              <button class="btn secondary" id="resetFormBtn" type="button" style="flex: 1;">Reset</button>
             </div>
           </form>
         </article>
 
-        <!-- Public Scannable QR Station -->
-        <aside class="glass-card card-body qr-hero-card">
-          <span class="badge-label">Quick Scan Hub</span>
-          <h2 class="card-title">Mobile Link Station</h2>
-          <p class="qr-tagline">Scan with your phone camera to open our online menu and instant review form.</p>
+        <!-- Public QR Display (Locked Editing) -->
+        <article class="card">
+          <span class="section-kicker">Quick Scan Station</span>
+          <h2>Digital Tap Point</h2>
+          <p class="sub">Scan with any phone camera to share or re-order instantly.</p>
 
-          <div class="qr-status-indicator">
-            <span class="pulse-dot"></span> Live Scannable Barcode
-          </div>
-
-          <div class="qr-capsule">
-            <img id="qrDisplayImage" src="" alt="Juice Bike Official QR Code" />
-          </div>
-
-          <a id="downloadQrBtn" class="btn-liquid secondary" download="juice-bike-scan.png" style="width: 100%;">
-            Download QR Code ⬇
-          </a>
-        </aside>
-      </div>
-    </section>
-
-    <!-- =========================================================
-         VIEW 2: OWNER PROTECTED GATE & MANAGEMENT PANEL
-         ========================================================= -->
-    <section id="view-owner" class="view-content">
-      <!-- Passcode Prompt (Hidden when authorized) -->
-      <div class="glass-card lock-box" id="lockPromptBox">
-        <div class="lock-icon-wrap">🔒</div>
-        <h3>Owner Authorization</h3>
-        <p>Enter owner passcode to update the live QR target address and manage customer feedback logs.</p>
-
-        <form id="ownerLoginForm" style="display: grid; gap: 14px;">
-          <input type="password" id="ownerPassInput" class="juice-input" placeholder="Enter owner passcode..." autocomplete="current-password" required />
-          <button type="submit" class="btn-liquid primary" style="width: 100%;">Unlock Station 🗝️</button>
-        </form>
-      </div>
-
-      <!-- Authenticated Private Station -->
-      <div class="protected-hub" id="protectedHub">
-        <div class="admin-sub-grid">
-          <!-- QR Editor (Restricted strictly to owner) -->
-          <div class="owner-qr-box">
-            <span class="badge-label">Owner Privilege</span>
-            <h2 class="card-title" style="font-size: 20px;">Edit Target QR URL</h2>
-            <p class="card-desc" style="font-size: 13px; margin-bottom: 16px;">Change destination link that customers see when scanning the QR Code.</p>
-
-            <form id="qrUpdateForm" style="display: grid; gap: 14px;">
-              <div class="form-group">
-                <label for="newQrUrlInput">Destination Web Link</label>
-                <input type="url" id="newQrUrlInput" class="juice-input" placeholder="https://yourjuicebike.com/menu" required />
-              </div>
-              <button type="submit" class="btn-liquid primary" style="font-size: 13px;">Save & Update Live QR Code ⚡</button>
-            </form>
-          </div>
-
-          <!-- Quick Owner Controls & Statistics -->
-          <div class="owner-qr-box" style="display: flex; flex-direction: column; justify-content: space-between;">
-            <div>
-              <span class="badge-label">Access Control</span>
-              <h2 class="card-title" style="font-size: 20px;">Session Guard</h2>
-              <p class="card-desc" style="font-size: 13px;">Lock dashboard when stepping away to keep customer records secure.</p>
+          <div class="qr-box">
+            <div class="qr-badge">🔒 Read-Only Link (Owner Managed)</div>
+            <div class="qr-frame">
+              <img id="publicQrImage" src="" alt="Live Juice Bike QR" />
             </div>
-            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-              <button type="button" id="lockDashboardBtn" class="btn-liquid secondary" style="flex: 1;">Lock Console 🔒</button>
-              <button type="button" id="wipeAllReviewsBtn" class="btn-liquid danger" style="flex: 1;">Clear Reviews 🗑️</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Customer Feed Stream -->
-        <article class="glass-card card-body">
-          <div class="stream-header">
-            <div>
-              <h2 class="card-title" style="font-size: 22px;">Recent Customer Tasting Log</h2>
-              <p class="card-desc" style="margin-bottom: 0; font-size: 13px;">Live stream of received feedback.</p>
-            </div>
-            <span class="stream-pill" id="reviewCountBadge">0 Reviews</span>
-          </div>
-
-          <div class="reviews-stream" id="reviewsContainer">
-            <!-- Populated via Javascript -->
+            <div class="qr-target-display" id="publicQrTarget">Connecting...</div>
+            <a id="downloadQrTag" class="btn secondary" download="juice-bike-scan.png" style="width: 100%;">
+              Save QR Code ⬇
+            </a>
           </div>
         </article>
       </div>
     </section>
+
+    <!-- SECTION 2: Owner Protected Management -->
+    <section id="dashboard-view" class="app-panel">
+      <article class="card">
+        <span class="section-kicker">Authorized Control</span>
+        <h2>Owner Dashboard</h2>
+        <p class="sub">Enter your security credential to manage the feed, respond to tasters, and update the QR destination.</p>
+
+        <!-- Passcode Lock Gate -->
+        <div id="lockGate" style="max-width: 420px; margin-bottom: 24px;">
+          <label for="adminKey" style="margin-bottom: 8px;">Security Passcode</label>
+          <div style="display: flex; gap: 10px;">
+            <input id="adminKey" type="password" placeholder="Enter key..." />
+            <button class="btn" id="unlockDashboardBtn" type="button">Access</button>
+          </div>
+        </div>
+
+        <!-- Protected Admin Panel -->
+        <div id="ownerWorkspace" class="hidden">
+          <!-- QR Modifier Section for Owner Only -->
+          <div style="background: var(--bg-alt); border: 1px solid var(--border); padding: 22px; border-radius: 20px; margin-bottom: 24px;">
+            <label style="font-weight: 800; margin-bottom: 6px; display: block;">Update Live QR Destination URL</label>
+            <div style="display: flex; gap: 10px;">
+              <input id="adminQrInput" type="url" placeholder="https://..." style="flex: 1;" />
+              <button class="btn" id="saveQrBtn" type="button">Update Target</button>
+            </div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="font-size: 18px; font-weight: 800;">Customer Reviews & Owner Replies</h3>
+            <span id="reviewCountTag" class="qr-badge" style="margin: 0;">0 Reviews</span>
+          </div>
+
+          <div class="review-stream" id="ownerReviewList"></div>
+
+          <div style="display: flex; justify-content: space-between; gap: 10px; margin-top: 24px;">
+            <button class="btn secondary" id="lockDashboardBtn" type="button">Lock Dashboard</button>
+            <button class="btn danger" id="wipeAllReviewsBtn" type="button">Delete All Reviews</button>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <footer class="footer">
+      Juice Bike Fresh Labs • Brewed with Mango & Apple Design Language
+    </footer>
   </main>
 
-  <!-- Notification Toast Container -->
-  <aside class="toast-region" id="toastContainer" aria-live="polite" aria-atomic="true"></aside>
+  <div class="toast-region" id="toastRegion" aria-live="polite"></div>
 
   <script>
     (() => {
       "use strict";
 
+      const STORAGE_KEY = "juice_bike_feed_v4";
+      const QR_KEY = "juice_bike_target_url";
+      const PASSCODE = "Sar.26@1999";
+
+      let activeRating = 5;
+      const ratingDescriptions = [
+        "1/5 — Needs Polish",
+        "2/5 — Average Pour",
+        "3/5 — Good Blend",
+        "4/5 — Very Refreshing",
+        "5/5 — Crisp Perfection"
+      ];
+
       /* =========================================================
-         CONSTANTS & CREDENTIAL SECURITY
+         THEME TOGGLE SYSTEM (Mango / Apple Accents)
          ========================================================= */
-      const SECRET_KEY = "Sar.26@1999";
-      const STORAGE_REVIEWS_KEY = "juice_bike_feed_v4";
-      const STORAGE_QR_KEY = "juice_bike_target_url_v4";
-      const STORAGE_THEME_KEY = "juice_bike_theme";
+      const themeToggle = document.getElementById("themeToggle");
+      const root = document.documentElement;
 
-      let currentRating = 5;
+      const savedTheme = localStorage.getItem("juice_theme") || "light";
+      root.setAttribute("data-theme", savedTheme);
+      updateThemeIcon(savedTheme);
 
-      /* =========================================================
-         THEME ENGINE (MILD LIGHT / MILD DARK)
-         ========================================================= */
-      const htmlEl = document.documentElement;
-      const themeToggleBtn = document.getElementById("themeToggleBtn");
-      const themeIcon = document.getElementById("themeIcon");
-
-      function applyTheme(theme) {
-        htmlEl.setAttribute("data-theme", theme);
-        localStorage.setItem(STORAGE_THEME_KEY, theme);
-        themeIcon.textContent = theme === "dark" ? "☀️" : "🌙";
-      }
-
-      const savedTheme = localStorage.getItem(STORAGE_THEME_KEY) || "light";
-      applyTheme(savedTheme);
-
-      themeToggleBtn.addEventListener("click", () => {
-        const nextTheme = htmlEl.getAttribute("data-theme") === "dark" ? "light" : "dark";
-        applyTheme(nextTheme);
+      themeToggle.addEventListener("click", () => {
+        const nextTheme = root.getAttribute("data-theme") === "light" ? "dark" : "light";
+        root.setAttribute("data-theme", nextTheme);
+        localStorage.setItem("juice_theme", nextTheme);
+        updateThemeIcon(nextTheme);
+        createToast("Aesthetic Switched", `Active palette: ${nextTheme === "dark" ? "Ripe Mango Dark" : "Apple Cider Light"}`);
       });
 
-      /* =========================================================
-         ACCESSIBLE TOAST NOTIFICATIONS (NO PASSWORDS EXPOSED)
-         ========================================================= */
-      const toastContainer = document.getElementById("toastContainer");
-
-      function notify(title, message, icon = "✓") {
-        const toast = document.createElement("div");
-        toast.className = "toast";
-        toast.innerHTML = `
-          <div class="toast-icon">${icon}</div>
-          <div style="flex: 1;">
-            <div class="toast-title">${sanitizeHtml(title)}</div>
-            <div class="toast-desc">${sanitizeHtml(message)}</div>
-          </div>
-        `;
-        toastContainer.appendChild(toast);
-
-        window.setTimeout(() => {
-          toast.classList.add("out");
-          window.setTimeout(() => toast.remove(), 320);
-        }, 3000);
-      }
-
-      function sanitizeHtml(str) {
-        return String(str)
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#39;");
+      function updateThemeIcon(t) {
+        themeToggle.textContent = t === "dark" ? "🍎" : "🥭";
       }
 
       /* =========================================================
-         NAVBAR VIEW SWITCHER
+         NAVIGATION ROUTING SYSTEM
          ========================================================= */
-      const navButtons = document.querySelectorAll(".nav-pill");
-      const viewContainers = document.querySelectorAll(".view-content");
+      const navButtons = document.querySelectorAll(".nav-btn");
+      const panels = document.querySelectorAll(".app-panel");
 
       navButtons.forEach(btn => {
         btn.addEventListener("click", () => {
-          const targetId = btn.dataset.view;
-          navButtons.forEach(b => {
-            b.classList.remove("active");
-            b.setAttribute("aria-selected", "false");
-          });
-          viewContainers.forEach(v => v.classList.remove("active"));
-
+          navButtons.forEach(b => b.classList.remove("active"));
+          panels.forEach(p => p.classList.remove("active"));
           btn.classList.add("active");
-          btn.setAttribute("aria-selected", "true");
-          const targetView = document.getElementById(targetId);
-          if (targetView) targetView.classList.add("active");
+          document.getElementById(btn.dataset.target).classList.add("active");
         });
       });
 
       /* =========================================================
-         QR SYSTEM (PUBLIC VIEW ONLY - EDIT RESTRICTED TO OWNER)
+         TOAST NOTIFICATION ENGINE
          ========================================================= */
-      const qrDisplayImage = document.getElementById("qrDisplayImage");
-      const downloadQrBtn = document.getElementById("downloadQrBtn");
-      const newQrUrlInput = document.getElementById("newQrUrlInput");
-      const qrUpdateForm = document.getElementById("qrUpdateForm");
+      const toastRegion = document.getElementById("toastRegion");
 
-      function getSavedQrUrl() {
-        return localStorage.getItem(STORAGE_QR_KEY) || (window.location.href.includes("http") ? window.location.href : "https://juice-bike.artisan");
+      function createToast(title, description, icon = "✓") {
+        const item = document.createElement("div");
+        item.className = "toast-pill";
+        item.innerHTML = `
+          <div class="toast-icon">${escapeHtml(icon)}</div>
+          <div class="toast-details">
+            <strong>${escapeHtml(title)}</strong>
+            <span>${escapeHtml(description)}</span>
+          </div>
+        `;
+        toastRegion.appendChild(item);
+
+        setTimeout(() => {
+          item.classList.add("out");
+          setTimeout(() => item.remove(), 320);
+        }, 3000);
       }
 
-      function renderQRCode(url) {
+      /* =========================================================
+         QR CODE HUB (Protected Updates)
+         ========================================================= */
+      const publicQrImage = document.getElementById("publicQrImage");
+      const publicQrTarget = document.getElementById("publicQrTarget");
+      const downloadQrTag = document.getElementById("downloadQrTag");
+      const adminQrInput = document.getElementById("adminQrInput");
+
+      function getStoredUrl() {
+        return localStorage.getItem(QR_KEY) || (window.location.href.includes("http") ? window.location.href : "https://juice-bike.local");
+      }
+
+      function syncQrCode(url) {
         const encoded = encodeURIComponent(url);
-        const apiSrc = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encoded}&color=2b1e1a&bgcolor=ffffff`;
-        qrDisplayImage.src = apiSrc;
-        downloadQrBtn.href = apiSrc;
-        newQrUrlInput.value = url;
+        const source = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encoded}`;
+        publicQrImage.src = source;
+        publicQrTarget.textContent = url;
+        downloadQrTag.href = source;
+        adminQrInput.value = url;
       }
 
-      // Initialize QR from storage
-      renderQRCode(getSavedQrUrl());
+      syncQrCode(getStoredUrl());
 
       /* =========================================================
-         INTERACTIVE RATING STARS
+         STAR RATING INTERACTION
          ========================================================= */
-      const starButtons = document.querySelectorAll(".star-btn");
-      const ratingVerdict = document.getElementById("ratingVerdict");
-      const ratingsMeta = [
-        "Needs more flavor",
-        "Could be sweeter",
-        "Good & refreshing",
-        "Delicious blend",
-        "Peak Sweetness!"
-      ];
+      const starUnits = document.querySelectorAll(".star-unit");
+      const ratingDescriptor = document.getElementById("ratingDescriptor");
 
-      function updateStarVisuals(score) {
-        currentRating = score;
-        starButtons.forEach((star, index) => {
-          star.classList.toggle("active", index < score);
+      function applyRating(val) {
+        activeRating = val;
+        starUnits.forEach((star, idx) => {
+          star.classList.toggle("active", idx < val);
         });
-        ratingVerdict.innerHTML = `<strong>${score} / 5</strong> — <span>${ratingsMeta[score - 1]}</span>`;
+        ratingDescriptor.textContent = ratingDescriptions[val - 1];
       }
 
-      starButtons.forEach(btn => {
-        btn.addEventListener("click", () => updateStarVisuals(Number(btn.dataset.score)));
+      starUnits.forEach(star => {
+        star.addEventListener("click", () => {
+          applyRating(Number(star.dataset.val));
+        });
       });
 
       /* =========================================================
-         CHARACTER COUNT TRACKER
+         REVIEWS DATA ENGINE & OWNER REPLIES
          ========================================================= */
+      const charTicker = document.getElementById("charTicker");
       const reviewTextarea = document.getElementById("userReview");
-      const charTracker = document.getElementById("charTracker");
 
       reviewTextarea.addEventListener("input", () => {
-        charTracker.textContent = reviewTextarea.value.length;
+        charTicker.textContent = `${reviewTextarea.value.length} / 400`;
       });
 
-      /* =========================================================
-         STORAGE HANDLERS
-         ========================================================= */
       function fetchReviews() {
         try {
-          const raw = localStorage.getItem(STORAGE_REVIEWS_KEY);
+          const raw = localStorage.getItem(STORAGE_KEY);
           return raw ? JSON.parse(raw) : [];
         } catch {
           return [];
         }
       }
 
-      function storeReviews(data) {
-        localStorage.setItem(STORAGE_REVIEWS_KEY, JSON.stringify(data));
+      function commitReviews(items) {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(items));
       }
 
-      /* =========================================================
-         CUSTOMER FORM SUBMISSION
-         ========================================================= */
-      const reviewForm = document.getElementById("reviewForm");
-      const userNameInput = document.getElementById("userName");
-      const resetFormBtn = document.getElementById("resetFormBtn");
-
-      reviewForm.addEventListener("submit", (e) => {
+      // Submit Review
+      document.getElementById("feedbackForm").addEventListener("submit", (e) => {
         e.preventDefault();
-        const author = userNameInput.value.trim();
-        const content = reviewTextarea.value.trim();
+        const name = document.getElementById("userName").value.trim();
+        const review = reviewTextarea.value.trim();
 
-        if (!author || !content) {
-          notify("Incomplete Review", "Please provide both your name and tasting review.", "!");
+        if (!name || !review) {
+          createToast("Missing Info", "Please provide both your name and review note.", "!");
           return;
         }
 
-        const items = fetchReviews();
-        items.unshift({
-          id: Date.now(),
-          name: author,
-          review: content,
-          rating: currentRating,
-          timestamp: new Date().toISOString()
-        });
-        storeReviews(items);
+        const list = fetchReviews();
+        const entry = {
+          id: "rev_" + Date.now(),
+          name,
+          review,
+          rating: activeRating,
+          timestamp: new Date().toISOString(),
+          reply: ""
+        };
 
-        reviewForm.reset();
-        updateStarVisuals(5);
-        charTracker.textContent = "0";
-        notify("Tasting Logged!", "Thank you for supporting Juice Bike! 🥭🍎");
+        list.unshift(entry);
+        commitReviews(list);
 
-        // Update dashboard if unlocked
-        if (protectedHub.classList.contains("active")) {
-          loadReviewsIntoOwnerStream();
-        }
+        e.target.reset();
+        applyRating(5);
+        charTicker.textContent = "0 / 400";
+        createToast("Review Recorded", "Thank you for tasting our artisanal blend! 🍎");
+        renderDashboardFeed();
       });
 
-      resetFormBtn.addEventListener("click", () => {
-        reviewForm.reset();
-        updateStarVisuals(5);
-        charTracker.textContent = "0";
-        notify("Form Cleared", "Ready for a fresh review.", "↺");
+      // Reset Button
+      document.getElementById("resetFormBtn").addEventListener("click", () => {
+        document.getElementById("feedbackForm").reset();
+        applyRating(5);
+        charTicker.textContent = "0 / 400";
+        createToast("Form Cleared", "Ready for a new review entry.");
       });
 
       /* =========================================================
-         OWNER AUTHENTICATION & SECURE QR UPDATER
+         OWNER MANAGEMENT CONSOLE
          ========================================================= */
-      const ownerLoginForm = document.getElementById("ownerLoginForm");
-      const ownerPassInput = document.getElementById("ownerPassInput");
-      const lockPromptBox = document.getElementById("lockPromptBox");
-      const protectedHub = document.getElementById("protectedHub");
-      const lockDashboardBtn = document.getElementById("lockDashboardBtn");
-      const wipeAllReviewsBtn = document.getElementById("wipeAllReviewsBtn");
-      const reviewsContainer = document.getElementById("reviewsContainer");
-      const reviewCountBadge = document.getElementById("reviewCountBadge");
+      const lockGate = document.getElementById("lockGate");
+      const ownerWorkspace = document.getElementById("ownerWorkspace");
+      const adminKeyInput = document.getElementById("adminKey");
+      const ownerReviewList = document.getElementById("ownerReviewList");
+      const reviewCountTag = document.getElementById("reviewCountTag");
 
-      ownerLoginForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        if (ownerPassInput.value === SECRET_KEY) {
-          lockPromptBox.style.display = "none";
-          protectedHub.classList.add("active");
-          ownerPassInput.value = "";
-          loadReviewsIntoOwnerStream();
-          notify("Access Granted", "Manager dashboard unlocked.", "✓");
+      // Passcode Validation
+      document.getElementById("unlockDashboardBtn").addEventListener("click", () => {
+        if (adminKeyInput.value === PASSCODE) {
+          lockGate.classList.add("hidden");
+          ownerWorkspace.classList.remove("hidden");
+          adminKeyInput.value = "";
+          renderDashboardFeed();
+          createToast("Access Granted", "Owner command mode active.");
         } else {
-          notify("Access Denied", "Incorrect passcode entered.", "✕");
-          ownerPassInput.value = "";
-          ownerPassInput.focus();
+          createToast("Access Denied", "Invalid security passcode.", "✕");
+          adminKeyInput.select();
         }
       });
 
-      lockDashboardBtn.addEventListener("click", () => {
-        protectedHub.classList.remove("active");
-        lockPromptBox.style.display = "block";
-        notify("Session Locked", "Owner control panel is locked.");
+      // Re-lock
+      document.getElementById("lockDashboardBtn").addEventListener("click", () => {
+        ownerWorkspace.classList.add("hidden");
+        lockGate.classList.remove("hidden");
+        createToast("Locked", "Owner panel secured.");
       });
 
-      // ONLY authenticated owner can update QR URL
-      qrUpdateForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const newUrl = newQrUrlInput.value.trim();
-        if (newUrl) {
-          localStorage.setItem(STORAGE_QR_KEY, newUrl);
-          renderQRCode(newUrl);
-          notify("QR Code Updated", "New target link successfully applied! 🚀");
+      // Update Live QR Target
+      document.getElementById("saveQrBtn").addEventListener("click", () => {
+        const val = adminQrInput.value.trim();
+        if (!val) {
+          createToast("Invalid URL", "Please provide a valid URL destination.", "!");
+          return;
         }
+        localStorage.setItem(QR_KEY, val);
+        syncQrCode(val);
+        createToast("QR Updated", "Public QR Code points to the new destination.");
       });
 
-      function loadReviewsIntoOwnerStream() {
-        const reviews = fetchReviews();
-        reviewCountBadge.textContent = `${reviews.length} Tasting${reviews.length === 1 ? "" : "s"}`;
+      // Render Admin Feed with Reply Mechanism
+      function renderDashboardFeed() {
+        const items = fetchReviews();
+        reviewCountTag.textContent = `${items.length} Review${items.length === 1 ? "" : "s"}`;
 
-        if (!reviews.length) {
-          reviewsContainer.innerHTML = `<div class="empty-state">No feedback recorded yet. Fresh customer reviews will show up here.</div>`;
+        if (!items.length) {
+          ownerReviewList.innerHTML = `<div style="text-align:center; padding: 30px; color: var(--text-muted);">No reviews submitted yet.</div>`;
           return;
         }
 
-        reviewsContainer.innerHTML = reviews.map(item => `
-          <div class="review-bubble">
-            <div class="bubble-head">
-              <span class="bubble-author">${sanitizeHtml(item.name)}</span>
-              <span class="bubble-date">${new Date(item.timestamp).toLocaleString()}</span>
+        ownerReviewList.innerHTML = items.map(it => `
+          <div class="review-card" data-id="${it.id}">
+            <div class="review-header">
+              <span class="review-user">${escapeHtml(it.name)}</span>
+              <span class="review-meta">${new Date(it.timestamp).toLocaleString()}</span>
             </div>
-            <div class="bubble-stars">${"★".repeat(item.rating)}${"☆".repeat(5 - item.rating)}</div>
-            <div class="bubble-msg">${sanitizeHtml(item.review)}</div>
+            <div class="review-score">${"★".repeat(it.rating)}${"☆".repeat(5 - it.rating)}</div>
+            <div class="review-body">${escapeHtml(it.review)}</div>
+
+            ${it.reply ? `
+              <div class="owner-reply-box">
+                <div class="owner-reply-title">🍹 Owner's Note</div>
+                <div class="owner-reply-content">${escapeHtml(it.reply)}</div>
+              </div>
+            ` : ""}
+
+            <div class="reply-input-row">
+              <input type="text" placeholder="${it.reply ? "Update your reply..." : "Write a warm owner reply..."}" class="reply-text-field" value="${it.reply ? escapeHtml(it.reply) : ''}" />
+              <button class="btn secondary reply-save-btn" style="min-height: 40px; padding: 0 16px;">Reply</button>
+            </div>
           </div>
         `).join("");
+
+        // Attach dynamic reply handlers
+        document.querySelectorAll(".reply-save-btn").forEach(button => {
+          button.addEventListener("click", (e) => {
+            const card = e.target.closest(".review-card");
+            const id = card.dataset.id;
+            const text = card.querySelector(".reply-text-field").value.trim();
+
+            const all = fetchReviews();
+            const targetIndex = all.findIndex(x => x.id === id);
+            if (targetIndex !== -1) {
+              all[targetIndex].reply = text;
+              commitReviews(all);
+              renderDashboardFeed();
+              createToast("Reply Posted", "Your message is attached to this taster's review.");
+            }
+          });
+        });
       }
 
-      wipeAllReviewsBtn.addEventListener("click", () => {
-        if (confirm("Are you sure you want to delete all customer reviews? This action cannot be reversed.")) {
-          localStorage.removeItem(STORAGE_REVIEWS_KEY);
-          loadReviewsIntoOwnerStream();
-          notify("Records Wiped", "All review entries have been cleared.", "🗑️");
+      // Wipe Data
+      document.getElementById("wipeAllReviewsBtn").addEventListener("click", () => {
+        if (confirm("Are you sure you want to delete all customer reviews?")) {
+          localStorage.removeItem(STORAGE_KEY);
+          renderDashboardFeed();
+          createToast("Purged", "All reviews cleared from local storage.");
         }
       });
+
+      function escapeHtml(str) {
+        return String(str)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#39;");
+      }
     })();
   </script>
 </body>
